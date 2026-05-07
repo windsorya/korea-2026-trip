@@ -10,7 +10,9 @@ export default function SeoulJeonjuTrip() {
   const [emergencyOpen, setEmergencyOpen] = useState(false);
   const [phrasesOpen, setPhrasesOpen] = useState(false);
   const [daysToGo, setDaysToGo] = useState(null);
-  const [overviewTab, setOverviewTab] = useState('essentials'); // essentials | guide | info
+  const [overviewTab, setOverviewTab] = useState('essentials'); // essentials | guide | map | info
+  const [mapOpen, setMapOpen] = useState(false); // lightbox 開關
+  const [mapCity, setMapCity] = useState('seoul'); // seoul | jeonju
 
   useEffect(() => {
     const departure = new Date('2026-05-09T10:40:00+08:00');
@@ -84,7 +86,7 @@ export default function SeoulJeonjuTrip() {
   const shuttle = [
     { date: '5/9', time: '14:15', route: '仁川機場 → Sejong Hotel 明洞' },
     { date: '5/11', time: '09:00', route: 'Sejong Hotel → Lahan Hotel 全州' },
-    { date: '5/12', time: '13:10', route: '接全員 → 全州地方法院／檢察院／律師協會會館' },
+    { date: '5/12', time: '13:00', route: '接全員 → 全州地方法院／檢察院／律師協會會館' },
     { date: '5/13', time: '08:00', route: 'Lahan Hotel → 仁川機場' },
   ];
 
@@ -123,33 +125,29 @@ export default function SeoulJeonjuTrip() {
         { time: '07:00', title: '飯店附近早餐', sub: '出發前用餐', icon: Coffee },
         { time: '09:00', title: 'Sejong Hotel 集合・接駁出發', sub: '金先生 → 公路旅行', icon: Car },
         { time: '11:30', title: '抵達全羅北道', sub: '中途休息站必買核桃燒', icon: MapPin },
-        { time: '12:00', title: 'Lahan Hotel 韓方迎接', sub: '姜信武律師、朴鎰址律師', icon: Hotel, highlight: true },
-        { time: '12:30', title: '午餐：종로회관（鐘路會館）', sub: '全州拌飯＋牛肉餅・₩21,000/人・韓方預訂 13 位', icon: Utensils },
-        { time: '13:30', title: '全州韓屋村自由活動', sub: '韓服拍照・韓紙工藝・冰沙等美食（至 17:50）', icon: Camera },
-        { time: '18:00', title: '晚餐：부부상회（夫婦商會）五花肉店', sub: '全羅北道律師協會 國際交流委員會委員長等作陪', icon: Utensils, highlight: true },
-        { time: '20:00', title: '晚餐後聚會：전일갑오（全日甲午）', sub: '酒菜店（至 22:00）', icon: Utensils },
+        { time: '13:00', title: 'Lahan Hotel 韓方迎接', sub: '姜信武律師、朴鎰址律師', icon: Hotel, highlight: true },
+        { time: '13:30', title: '午餐', sub: '韓方安排', icon: Utensils },
+        { time: '15:00', title: '全州韓屋村自由活動', sub: '韓服拍照・韓紙工藝・冰沙', icon: Camera },
+        { time: '18:00', title: '五花肉晚餐', sub: '全羅北道律師協會 國際交流委員會委員長作陪', icon: Utensils, highlight: true },
       ],
     },
     '0512': {
       title: '官方交流日 ・ 兩會國際交流',
-      note: '本日為訪問重點。法院、檢察院為正式外交場合，請著正裝。法院／檢察院／律師協會會館皆可走路串連。',
+      note: '本日為訪問重點。法院、檢察院為正式外交場合，請著正裝。',
       schedule: [
-        { time: '07:00', title: '早餐 + 自由活動', sub: '飯店或全州解酒豆芽湯飯店・姜信武律師陪同（至 10:30）', icon: Coffee },
-        { time: '10:50', title: '慶基殿 文化參觀', sub: '1410 年朝鮮太宗 11 年建・供奉太祖李成桂御真・中文解說員 임정숙 林先生 010-6778-6080・₩3,000/人・預訂 13 位（至 12:00）', icon: Building2 },
-        { time: '12:00', title: '午餐：베테랑칼국수（老兵刀削麵）', sub: '姜信武律師、朴鎰址律師作陪', icon: Utensils },
-        { time: '13:10', title: '巴士移動 → 法院', sub: 'Lahan Hotel 出發・約 30 分鐘・在法院正門下車', icon: Car },
-        { time: '14:00', title: '全州地方法院 拜會法院長', sub: '喝茶・參觀法院・正式外交（可拍照、有紀念品）', icon: Scale, highlight: true, formal: true },
-        { time: '15:00', title: '全州地方檢察院 拜會檢察長', sub: '從法院走路過去・喝茶・參觀檢察院・正式外交（可拍照、有紀念品）', icon: Briefcase, highlight: true, formal: true },
-        { time: '16:00', title: '全羅北道律師協會會館', sub: '兩會國際交流活動・會長等出席（巴士停會館後方空地）', icon: Users, highlight: true, formal: true },
-        { time: '16:50', title: '巴士回 Lahan Hotel・整理', sub: '車程約 30 分・整理至 17:50', icon: Car },
-        { time: '18:00', title: '晚餐：천년누리봄（千年Nuribom）', sub: '全羅北道律師協會會長等作陪（至 21:00）', icon: Utensils, highlight: true },
-        { time: '21:00', title: '晚餐後聚會', sub: '全羅北道律師協會會長等・酒菜店（至 22:30）', icon: Utensils },
+        { time: '07:00', title: '早餐', sub: '飯店或全州解酒豆芽湯飯店', icon: Coffee },
+        { time: '11:00', title: '慶基殿 文化參觀', sub: '1410 年朝鮮太宗 11 年建・供奉太祖李成桂御真・中文導覽預訂中', icon: Building2 },
+        { time: '12:00', title: '午餐', sub: '姜信武、朴鎰址作陪', icon: Utensils },
+        { time: '14:00', title: '全州地方法院 拜會法院長', sub: '喝茶・參觀法院・正式外交', icon: Scale, highlight: true, formal: true },
+        { time: '15:00', title: '全州地方檢察院 拜會檢察長', sub: '喝茶・參觀檢察院・正式外交', icon: Briefcase, highlight: true, formal: true },
+        { time: '16:00', title: '全羅北道律師協會會館', sub: '兩會國際交流活動・會長等出席', icon: Users, highlight: true, formal: true },
+        { time: '18:00', title: '晚餐', sub: '全羅北道律師協會會長作陪', icon: Utensils, highlight: true },
       ],
     },
     '0513': {
       title: '送別 ・ 歸國',
       schedule: [
-        { time: '07:30', title: 'Lahan Hotel 送別', sub: '姜信武律師、朴鎰址律師', icon: Hotel },
+        { time: '06:30', title: 'Lahan Hotel 送別', sub: '姜信武律師、朴鎰址律師', icon: Hotel },
         { time: '08:00', title: '接駁出發', sub: 'Lahan Hotel → 仁川機場', icon: Car },
         { time: '14:50', title: 'LJ737 起飛', sub: '仁川 T2 → 台中清泉崗 T1', icon: Plane },
         { time: '16:30', title: '抵達台灣', sub: '結束 5 天 4 夜行程', icon: Home },
@@ -390,14 +388,16 @@ export default function SeoulJeonjuTrip() {
               </div>
             </Section>
 
-            {/* ── 三分頁 pill：行前必看 / 攻略 / 聯絡資訊 ── */}
-            <div className="flex gap-2 bg-white/80 backdrop-blur p-1.5 rounded-2xl ink-shadow">
+            {/* ── 四分頁 pill：行前必看 / 攻略 / 地圖 / 聯絡資訊 ── */}
+            <div className="grid grid-cols-4 gap-1.5 bg-white/80 backdrop-blur p-1.5 rounded-2xl ink-shadow">
               <OverviewPill active={overviewTab === 'essentials'} onClick={() => setOverviewTab('essentials')}
-                icon={Plane} label="行前必看" sub="航班 · 住宿 · 接駁" />
+                icon={Plane} label="行前必看" sub="航班 · 住宿" />
               <OverviewPill active={overviewTab === 'guide'} onClick={() => setOverviewTab('guide')}
-                icon={Sparkles} label="攻略" sub="必吃 · 必買 · 必看" />
+                icon={Sparkles} label="攻略" sub="吃 · 買 · 看" />
+              <OverviewPill active={overviewTab === 'map'} onClick={() => setOverviewTab('map')}
+                icon={MapPin} label="地圖" sub="飯店 3km" />
               <OverviewPill active={overviewTab === 'info'} onClick={() => setOverviewTab('info')}
-                icon={Phone} label="聯絡資訊" sub="聯絡人 · 實用" />
+                icon={Phone} label="聯絡" sub="聯絡人" />
             </div>
 
             {/* ── 行前必看 ── */}
@@ -499,7 +499,198 @@ export default function SeoulJeonjuTrip() {
               </div>
             )}
 
-            {/* ── 聯絡資訊 ── */}
+            {/* ── 地圖（攻略圖 + 熱點）── */}
+            {overviewTab === 'map' && (
+              <div className="space-y-4 fade-up">
+
+                {/* 城市切換 pill */}
+                <div className="grid grid-cols-2 gap-2 bg-white/80 backdrop-blur p-1.5 rounded-2xl ink-shadow">
+                  <button
+                    onClick={() => setMapCity('seoul')}
+                    className={`flex flex-col items-center gap-0.5 px-2 py-2.5 rounded-xl transition-all ${
+                      mapCity === 'seoul' ? 'text-white shadow-md' : 'text-stone-500 hover:bg-blue-50'
+                    }`}
+                    style={mapCity === 'seoul' ? { background: 'linear-gradient(135deg, #4DA3D6 0%, #6FBEE0 100%)' } : {}}>
+                    <div className="text-sm font-bold leading-none" style={mapCity !== 'seoul' ? { color: '#0F4C75' } : {}}>首爾</div>
+                    <div className={`text-[10px] leading-none mt-1 ${mapCity === 'seoul' ? 'text-white/85' : 'text-stone-400'}`}>5/9 - 5/11 · 飯店 3km</div>
+                  </button>
+                  <button
+                    onClick={() => setMapCity('jeonju')}
+                    className={`flex flex-col items-center gap-0.5 px-2 py-2.5 rounded-xl transition-all ${
+                      mapCity === 'jeonju' ? 'text-white shadow-md' : 'text-stone-500 hover:bg-blue-50'
+                    }`}
+                    style={mapCity === 'jeonju' ? { background: 'linear-gradient(135deg, #FFB800 0%, #FFD24A 100%)' } : {}}>
+                    <div className="text-sm font-bold leading-none" style={mapCity !== 'jeonju' ? { color: '#0F4C75' } : {}}>全州</div>
+                    <div className={`text-[10px] leading-none mt-1 ${mapCity === 'jeonju' ? 'text-white/85' : 'text-stone-400'}`}>5/11 - 5/13 · 拜會行程</div>
+                  </button>
+                </div>
+
+                {/* 首爾地圖 */}
+                {mapCity === 'seoul' && (
+                  <Section title="首爾旅遊地圖" subtitle="Seoul Travel Map · 飯店 3 公里半徑">
+                    <p className="text-xs text-stone-500 mb-3 px-1">
+                      📍 中心點:世宗飯店 · 點圖中地標跳 Google Maps · 點圖放大看細節
+                    </p>
+
+                    <div className="relative rounded-2xl overflow-hidden ink-shadow bg-white">
+                      <picture>
+                        <source srcSet="/seoul-map.webp" type="image/webp" />
+                        <img
+                          src="/seoul-map.jpg"
+                          alt="首爾旅遊地圖"
+                          className="w-full h-auto block cursor-zoom-in"
+                          onClick={() => setMapOpen(true)}
+                          loading="lazy"
+                        />
+                      </picture>
+
+                      <Hotspot top="14%" left="44%" label="景福宮"
+                        query="景福宮 Gyeongbokgung Palace Seoul" />
+                      <Hotspot top="22%" left="60%" label="昌德宮"
+                        query="昌德宮 Changdeokgung Palace Seoul" />
+                      <Hotspot top="46%" left="56%" label="明洞大聖堂"
+                        query="명동성당 Myeongdong Cathedral Seoul" />
+                      <Hotspot top="32%" left="72%" label="N首爾塔"
+                        query="N Seoul Tower 남산서울타워" />
+                      <Hotspot top="68%" left="44%" label="明洞商圈"
+                        query="명동 Myeongdong Shopping Street Seoul" />
+                      <Hotspot top="68%" left="60%" label="Olive Young"
+                        query="올리브영 명동타운점 Olive Young Myeongdong" />
+                      <Hotspot top="84%" left="46%" label="廣藏市場"
+                        query="광장시장 Gwangjang Market Seoul" />
+                      <Hotspot top="62%" left="28%" label="南大門市場"
+                        query="남대문시장 Namdaemun Market Seoul" />
+                      <Hotspot top="42%" left="22%" label="仁寺洞"
+                        query="인사동 Insadong Seoul" />
+                    </div>
+
+                    <div className="mt-3 text-[11px] text-stone-400 text-center px-2">
+                      地圖僅供本團內部參考使用 · 點圖可全螢幕檢視
+                    </div>
+                  </Section>
+                )}
+
+                {/* 全州地圖 */}
+                {mapCity === 'jeonju' && (
+                  <Section title="全州 Jeonju 拜會地圖" subtitle="韓屋之城 · 美食之都 · 文化交流之旅">
+                    <p className="text-xs text-stone-500 mb-3 px-1">
+                      📍 中心點:Lahan Hotel · 5/12 拜會 4 個官方地點 · 司機接送 · 點圖放大看細節
+                    </p>
+
+                    <div className="relative rounded-2xl overflow-hidden ink-shadow bg-white">
+                      <picture>
+                        <source srcSet="/jeonju-map.webp" type="image/webp" />
+                        <img
+                          src="/jeonju-map.jpg"
+                          alt="全州拜會地圖"
+                          className="w-full h-auto block cursor-zoom-in"
+                          onClick={() => setMapOpen(true)}
+                          loading="lazy"
+                        />
+                      </picture>
+                    </div>
+
+                    <div className="mt-3 text-[11px] text-stone-400 text-center px-2">
+                      地圖僅供本團內部參考使用 · 點圖可全螢幕檢視
+                    </div>
+                  </Section>
+                )}
+
+                {/* 必逛/必買/必吃 重點(只在首爾顯示) */}
+                {mapCity === 'seoul' && (
+                  <Section title="飯店 3 公里範圍重點" subtitle="Quick Reference">
+                    <div className="grid grid-cols-1 gap-3">
+                      <div className="p-4 rounded-2xl bg-white border border-blue-100 ink-shadow">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-base">🏛️</span>
+                          <span className="text-xs font-bold tracking-[0.2em]" style={{ color: '#1E70A8' }}>必逛地標</span>
+                        </div>
+                        <div className="text-sm text-stone-700 leading-relaxed">
+                          景福宮 · 昌德宮 · 光化門 · 勤政殿 · N首爾塔 · 南山纜車 · 明洞大聖堂 · 明洞商圈 · 清溪川 · 南大門市場 · 廣藏市場 · 首爾火車站 · 仁寺洞傳統文化街
+                        </div>
+                      </div>
+                      <div className="p-4 rounded-2xl bg-white border border-blue-100 ink-shadow">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-base">🎁</span>
+                          <span className="text-xs font-bold tracking-[0.2em]" style={{ color: '#1E70A8' }}>必買特產</span>
+                        </div>
+                        <div className="text-sm text-stone-700 leading-relaxed">
+                          高麗人蔘 · 韓國海苔 · 柚子茶 · 韓國泡菜 · 韓國傳統工藝品 · K-Beauty 美妝
+                        </div>
+                      </div>
+                      <div className="p-4 rounded-2xl bg-white border border-blue-100 ink-shadow">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-base">🍴</span>
+                          <span className="text-xs font-bold tracking-[0.2em]" style={{ color: '#1E70A8' }}>必吃美食</span>
+                        </div>
+                        <div className="text-sm text-stone-700 leading-relaxed">
+                          韓式烤肉 · 部隊鍋 · 拌飯 · 辣炒年糕 · 廣藏市場綠豆煎餅 · 魚板湯
+                        </div>
+                      </div>
+                    </div>
+                  </Section>
+                )}
+
+                {/* 全州拜會行程清單 */}
+                {mapCity === 'jeonju' && (
+                  <Section title="5/12 拜會行程" subtitle="Official Visits">
+                    <div className="grid grid-cols-1 gap-3">
+                      <div className="p-4 rounded-2xl ink-shadow border-l-4" style={{ background: '#FEF6E0', borderLeftColor: '#FFB800' }}>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-bold text-sm" style={{ color: '#7A4D00' }}>11:00 ❶ 慶基殿</span>
+                        </div>
+                        <div className="text-xs" style={{ color: '#9A6300' }}>朝鮮王朝歷史建築 · 太祖李成桂御真 · 中文導覽</div>
+                      </div>
+                      <div className="p-4 rounded-2xl ink-shadow border-l-4" style={{ background: '#FEF6E0', borderLeftColor: '#FFB800' }}>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-bold text-sm" style={{ color: '#7A4D00' }}>14:00 ❷ 全州地方法院</span>
+                        </div>
+                        <div className="text-xs" style={{ color: '#9A6300' }}>拜會法院長 · 喝茶參觀 · 正式外交</div>
+                      </div>
+                      <div className="p-4 rounded-2xl ink-shadow border-l-4" style={{ background: '#FEF6E0', borderLeftColor: '#FFB800' }}>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-bold text-sm" style={{ color: '#7A4D00' }}>15:00 ❸ 全州地方檢察院</span>
+                        </div>
+                        <div className="text-xs" style={{ color: '#9A6300' }}>拜會檢察長 · 喝茶參觀 · 正式外交</div>
+                      </div>
+                      <div className="p-4 rounded-2xl ink-shadow border-l-4" style={{ background: '#FEF6E0', borderLeftColor: '#FFB800' }}>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-bold text-sm" style={{ color: '#7A4D00' }}>16:00 ❹ 全羅北道律師協會會館</span>
+                        </div>
+                        <div className="text-xs" style={{ color: '#9A6300' }}>兩會國際交流 · 會長等出席 · 18:00 晚餐</div>
+                      </div>
+                    </div>
+                  </Section>
+                )}
+
+                {/* 全州必吃必看 */}
+                {mapCity === 'jeonju' && (
+                  <Section title="全州必吃必看" subtitle="Local Highlights">
+                    <div className="grid grid-cols-1 gap-3">
+                      <div className="p-4 rounded-2xl bg-white border border-blue-100 ink-shadow">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-base">🍴</span>
+                          <span className="text-xs font-bold tracking-[0.2em]" style={{ color: '#1E70A8' }}>必吃美食</span>
+                        </div>
+                        <div className="text-sm text-stone-700 leading-relaxed">
+                          全州拌飯(色香味俱全) · 解酒湯飯(清爽暖胃) · 五花肉(香嫩多汁) · 紅豆湯(甜而不膩) · 高速公路休息站核桃燒
+                        </div>
+                      </div>
+                      <div className="p-4 rounded-2xl bg-white border border-blue-100 ink-shadow">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-base">🏯</span>
+                          <span className="text-xs font-bold tracking-[0.2em]" style={{ color: '#1E70A8' }}>韓屋村必看</span>
+                        </div>
+                        <div className="text-sm text-stone-700 leading-relaxed">
+                          韓紙工藝(體驗傳統工藝之美) · 韓服體驗(穿韓服留下美照) · 慶基殿(感受歷史氣息) · 殿洞聖堂(紅磚哥德式教堂)
+                        </div>
+                      </div>
+                    </div>
+                  </Section>
+                )}
+
+              </div>
+            )}
             {overviewTab === 'info' && (
               <div className="space-y-6 fade-up">
                 <Section title="聯絡人總表" subtitle="Contacts">
@@ -604,6 +795,35 @@ export default function SeoulJeonjuTrip() {
           </div>
         </Modal>
       )}
+
+      {/* ─── MAP LIGHTBOX ─── 點圖全螢幕看,可雙指縮放 */}
+      {mapOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-2"
+          onClick={() => setMapOpen(false)}
+        >
+          <button
+            onClick={(e) => { e.stopPropagation(); setMapOpen(false); }}
+            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/15 backdrop-blur flex items-center justify-center text-white hover:bg-white/30 transition"
+            aria-label="關閉"
+          >
+            <X className="w-6 h-6" />
+          </button>
+          <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur text-white text-xs">
+            雙指縮放看細節 · 點空白關閉
+          </div>
+          <picture>
+            <source srcSet={mapCity === 'jeonju' ? '/jeonju-map.webp' : '/seoul-map.webp'} type="image/webp" />
+            <img
+              src={mapCity === 'jeonju' ? '/jeonju-map.jpg' : '/seoul-map.jpg'}
+              alt={mapCity === 'jeonju' ? '全州拜會地圖' : '首爾旅遊地圖'}
+              className="max-w-full max-h-full object-contain"
+              onClick={(e) => e.stopPropagation()}
+              style={{ touchAction: 'pinch-zoom' }}
+            />
+          </picture>
+        </div>
+      )}
     </div>
   );
 }
@@ -614,13 +834,41 @@ export default function SeoulJeonjuTrip() {
 function OverviewPill({ active, onClick, icon: Icon, label, sub }) {
   return (
     <button onClick={onClick}
-      className={`flex-1 flex flex-col items-center gap-1 px-2 py-3 rounded-xl transition-all ${
+      className={`flex flex-col items-center gap-1 px-1 py-2.5 rounded-xl transition-all ${
         active ? 'text-white shadow-md' : 'text-stone-500 hover:bg-blue-50'
       }`}
       style={active ? { background: 'linear-gradient(135deg, #4DA3D6 0%, #6FBEE0 100%)' } : {}}>
       <Icon className="w-5 h-5" style={!active ? { color: '#1E70A8' } : {}} />
       <div className="text-xs font-bold leading-none" style={!active ? { color: '#0F4C75' } : {}}>{label}</div>
       <div className={`text-[9px] leading-none mt-0.5 ${active ? 'text-white/80' : 'text-stone-400'}`}>{sub}</div>
+    </button>
+  );
+}
+
+// 地圖熱點：點擊跳 Google Maps 導航
+function Hotspot({ top, left, label, query }) {
+  const handleClick = (e) => {
+    e.stopPropagation(); // 不要觸發父層的 lightbox open
+    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+    window.open(url, '_blank');
+  };
+  return (
+    <button
+      onClick={handleClick}
+      className="absolute -translate-x-1/2 -translate-y-1/2 group"
+      style={{ top, left }}
+      aria-label={`查看 ${label}`}
+    >
+      {/* 脈動光環 */}
+      <span className="absolute inset-0 rounded-full animate-ping" style={{ background: '#FFB800', opacity: 0.4 }}></span>
+      {/* 主要圓點 */}
+      <span className="relative block w-5 h-5 rounded-full border-2 border-white shadow-lg active:scale-90 transition-transform"
+        style={{ background: 'linear-gradient(135deg, #FF6B35 0%, #FFB800 100%)' }}>
+      </span>
+      {/* 標籤（hover 才出現,手機上點才出現,但因為點直接跳轉所以這只在大螢幕用） */}
+      <span className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-0.5 rounded-md bg-black/75 text-white text-[10px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+        {label}
+      </span>
     </button>
   );
 }
