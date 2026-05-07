@@ -110,7 +110,21 @@ export default function SeoulJeonjuTrip() {
         { time: '09:30', title: '北村韓屋村 晨間散策', sub: '傳統韓屋聚落・拍照點', icon: Camera },
         { time: '12:00', title: '明洞餃子 米其林午餐', sub: '必比登推薦', icon: Utensils },
         { time: '14:00', title: '明洞自由採買 + 大聖堂', sub: 'Olive Young・繁華商圈', icon: ShoppingBag },
-        { time: '17:00', title: 'NANTA 亂打秀', sub: '明洞 ANT 秀劇場・震撼全場', icon: Sparkles, highlight: true },
+        { time: '17:00', title: 'NANTA 亂打秀', sub: '明洞劇場・震撼全場', icon: Sparkles, highlight: true,
+          booking: {
+            source: 'KKday',
+            venue: '明洞劇場（注意：非弘大劇場）',
+            seat: 'S 區（1 樓 / 2 樓前方）',
+            qty: '7 張',
+            orderNo: '26KK296040710',
+            confirmNo: '2605070024',
+            rep: 'chungmin, ho',
+            enter: '16:50 入場（開演前 10 分鐘）',
+            tel: '+82 02-7398-288',
+            telLabel: '當地服務商 (주)피엠씨프러덕션',
+            rules: '禁止拍照／錄影・3 歲以上・走錯劇場恕不退款',
+          }
+        },
         { time: '19:00', title: 'BBQ Chicken 明洞之星店', sub: '12 人 Chimaek 終極慶典', icon: Utensils },
       ],
       alternatives: [
@@ -599,6 +613,10 @@ export default function SeoulJeonjuTrip() {
                 {/* 必逛/必買/必吃 重點(只在首爾顯示) */}
                 {mapCity === 'seoul' && (
                   <Section title="飯店 3 公里範圍重點" subtitle="Quick Reference">
+                    <div className="mb-3 px-3 py-2 rounded-lg text-xs flex items-center gap-1.5" style={{ background: '#FEF6E0', color: '#7A4D00' }}>
+                      <Navigation className="w-3.5 h-3.5 shrink-0" />
+                      <span>輕觸任一藍色項目即可開啟 Google Maps 導航</span>
+                    </div>
                     <div className="grid grid-cols-1 gap-3">
                       <div className="p-4 rounded-2xl bg-white border border-blue-100 ink-shadow">
                         <div className="flex items-center gap-2 mb-2">
@@ -606,7 +624,7 @@ export default function SeoulJeonjuTrip() {
                           <span className="text-xs font-bold tracking-[0.2em]" style={{ color: '#1E70A8' }}>必逛地標</span>
                         </div>
                         <div className="text-sm text-stone-700 leading-relaxed">
-                          景福宮 · 昌德宮 · 光化門 · 勤政殿 · N首爾塔 · 南山纜車 · 明洞大聖堂 · 明洞商圈 · 清溪川 · 南大門市場 · 廣藏市場 · 首爾火車站 · 仁寺洞傳統文化街
+                          <ChipLinks text="景福宮 · 昌德宮 · 光化門 · 勤政殿 · N首爾塔 · 南山纜車 · 明洞大聖堂 · 明洞商圈 · 清溪川 · 南大門市場 · 廣藏市場 · 首爾火車站 · 仁寺洞傳統文化街" hint="首爾" />
                         </div>
                       </div>
                       <div className="p-4 rounded-2xl bg-white border border-blue-100 ink-shadow">
@@ -615,7 +633,7 @@ export default function SeoulJeonjuTrip() {
                           <span className="text-xs font-bold tracking-[0.2em]" style={{ color: '#1E70A8' }}>必買特產</span>
                         </div>
                         <div className="text-sm text-stone-700 leading-relaxed">
-                          高麗人蔘 · 韓國海苔 · 柚子茶 · 韓國泡菜 · 韓國傳統工藝品 · K-Beauty 美妝
+                          <ChipLinks text="高麗人蔘 · 韓國海苔 · 柚子茶 · 韓國泡菜 · 韓國傳統工藝品 · K-Beauty 美妝" hint="首爾 명동" />
                         </div>
                       </div>
                       <div className="p-4 rounded-2xl bg-white border border-blue-100 ink-shadow">
@@ -624,7 +642,7 @@ export default function SeoulJeonjuTrip() {
                           <span className="text-xs font-bold tracking-[0.2em]" style={{ color: '#1E70A8' }}>必吃美食</span>
                         </div>
                         <div className="text-sm text-stone-700 leading-relaxed">
-                          韓式烤肉 · 部隊鍋 · 拌飯 · 辣炒年糕 · 廣藏市場綠豆煎餅 · 魚板湯
+                          <ChipLinks text="韓式烤肉 · 部隊鍋 · 拌飯 · 辣炒年糕 · 廣藏市場綠豆煎餅 · 魚板湯" hint="首爾 明洞" />
                         </div>
                       </div>
                     </div>
@@ -666,6 +684,10 @@ export default function SeoulJeonjuTrip() {
                 {/* 全州必吃必看 */}
                 {mapCity === 'jeonju' && (
                   <Section title="全州必吃必看" subtitle="Local Highlights">
+                    <div className="mb-3 px-3 py-2 rounded-lg text-xs flex items-center gap-1.5" style={{ background: '#FEF6E0', color: '#7A4D00' }}>
+                      <Navigation className="w-3.5 h-3.5 shrink-0" />
+                      <span>輕觸任一藍色項目即可開啟 Google Maps 導航</span>
+                    </div>
                     <div className="grid grid-cols-1 gap-3">
                       <div className="p-4 rounded-2xl bg-white border border-blue-100 ink-shadow">
                         <div className="flex items-center gap-2 mb-2">
@@ -673,7 +695,7 @@ export default function SeoulJeonjuTrip() {
                           <span className="text-xs font-bold tracking-[0.2em]" style={{ color: '#1E70A8' }}>必吃美食</span>
                         </div>
                         <div className="text-sm text-stone-700 leading-relaxed">
-                          全州拌飯(色香味俱全) · 解酒湯飯(清爽暖胃) · 五花肉(香嫩多汁) · 紅豆湯(甜而不膩) · 高速公路休息站核桃燒
+                          <ChipLinks text="全州拌飯(色香味俱全) · 解酒湯飯(清爽暖胃) · 五花肉(香嫩多汁) · 紅豆湯(甜而不膩) · 高速公路休息站核桃燒" hint="全州 韓屋村" />
                         </div>
                       </div>
                       <div className="p-4 rounded-2xl bg-white border border-blue-100 ink-shadow">
@@ -682,7 +704,7 @@ export default function SeoulJeonjuTrip() {
                           <span className="text-xs font-bold tracking-[0.2em]" style={{ color: '#1E70A8' }}>韓屋村必看</span>
                         </div>
                         <div className="text-sm text-stone-700 leading-relaxed">
-                          韓紙工藝(體驗傳統工藝之美) · 韓服體驗(穿韓服留下美照) · 慶基殿(感受歷史氣息) · 殿洞聖堂(紅磚哥德式教堂)
+                          <ChipLinks text="韓紙工藝(體驗傳統工藝之美) · 韓服體驗(穿韓服留下美照) · 慶基殿(感受歷史氣息) · 殿洞聖堂(紅磚哥德式教堂)" hint="全州 韓屋村" />
                         </div>
                       </div>
                     </div>
@@ -831,6 +853,25 @@ export default function SeoulJeonjuTrip() {
 // ─────────────────────────────────────────
 // SUB-COMPONENTS
 // ─────────────────────────────────────────
+function ChipLinks({ text, hint = '' }) {
+  return (
+    <>
+      {text.split(' · ').map((n, i, arr) => (
+        <React.Fragment key={i}>
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(n + (hint ? ' ' + hint : ''))}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline transition font-medium"
+            style={{ color: '#1E70A8' }}
+          >{n}</a>
+          {i < arr.length - 1 && <span className="text-stone-400"> · </span>}
+        </React.Fragment>
+      ))}
+    </>
+  );
+}
+
 function OverviewPill({ active, onClick, icon: Icon, label, sub }) {
   return (
     <button onClick={onClick}
@@ -1096,6 +1137,41 @@ function DayView({ day, details }) {
                         item.formal ? { color: '#9A6300' } :
                         item.highlight ? { color: 'rgba(255,255,255,0.85)' } : { color: '#78716c' }
                       }>{item.sub}</div>
+                      {item.booking && (
+                        <div className="mt-2 pt-2 text-xs space-y-1 border-t" style={
+                          item.highlight ? { borderColor: 'rgba(255,255,255,0.3)', color: 'rgba(255,255,255,0.95)' } :
+                          item.formal ? { borderColor: '#F0D58A', color: '#7A4D00' } :
+                          { borderColor: '#DBEAF4', color: '#0F4C75' }
+                        }>
+                          <div className="flex items-start gap-1.5">
+                            <Star className="w-3 h-3 mt-0.5 shrink-0" />
+                            <span><strong>{item.booking.seat}</strong>・{item.booking.qty}</span>
+                          </div>
+                          <div className="flex items-start gap-1.5">
+                            <MapPin className="w-3 h-3 mt-0.5 shrink-0" />
+                            <span>{item.booking.venue}</span>
+                          </div>
+                          <div className="flex items-start gap-1.5">
+                            <Clock className="w-3 h-3 mt-0.5 shrink-0" />
+                            <span>{item.booking.enter}</span>
+                          </div>
+                          <div className="opacity-80 text-[11px] leading-relaxed">
+                            {item.booking.source && <span>{item.booking.source} 訂單 {item.booking.orderNo} | 確認碼 {item.booking.confirmNo}</span>}
+                            {item.booking.rep && <><br/>代表人：{item.booking.rep}</>}
+                            {item.booking.rules && <><br/>{item.booking.rules}</>}
+                          </div>
+                          {item.booking.tel && (
+                            <a
+                              href={`tel:${item.booking.tel.replace(/[^+\d]/g, '')}`}
+                              onClick={(e) => e.stopPropagation()}
+                              className="flex items-center gap-1.5 mt-1 underline"
+                            >
+                              <Phone className="w-3 h-3 shrink-0" />
+                              <span>{item.booking.telLabel} {item.booking.tel}</span>
+                            </a>
+                          )}
+                        </div>
+                      )}
                     </div>
                     <a
                       href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.title)}`}
