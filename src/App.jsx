@@ -154,33 +154,33 @@ export default function SeoulJeonjuTrip() {
   };
 
   const mustEat = [
-    { name: '富村生牛肉', place: '廣藏市場', tag: '米其林・生拌活章魚' },
-    { name: '順熙家綠豆煎餅', place: '廣藏市場', tag: '廣藏市場靈魂' },
-    { name: '麻藥紫菜飯捲', place: '廣藏市場', tag: '沾芥末醬中毒' },
-    { name: '土俗村參雞湯', place: '景福宮旁', tag: 'Ginseng Chicken' },
-    { name: '明洞餃子', place: '明洞', tag: '米其林必比登' },
-    { name: 'BBQ Chicken 明洞之星', place: '明洞', tag: '炸雞啤酒慶典' },
-    { name: '黃金牧場 明洞店', place: '明洞', tag: '熟成五花肉・韓牛' },
-    { name: '北村六景', place: '北村韓屋村', tag: '餛飩麵' },
+    { name: '富村生牛肉', place: '廣藏市場', tag: '米其林・生拌活章魚', query: '富村生牛肉 廣藏市場 首爾' },
+    { name: '順熙家綠豆煎餅', place: '廣藏市場', tag: '廣藏市場靈魂', query: '順熙家 綠豆煎餅 廣藏市場' },
+    { name: '麻藥紫菜飯捲', place: '廣藏市場', tag: '沾芥末醬中毒', query: '麻藥紫菜飯捲 廣藏市場' },
+    { name: '土俗村參雞湯', place: '景福宮旁', tag: 'Ginseng Chicken', query: '土俗村蔘雞湯 首爾' },
+    { name: '明洞餃子', place: '明洞', tag: '米其林必比登', query: '明洞餃子 본점 首爾' },
+    { name: 'BBQ Chicken 明洞之星', place: '明洞', tag: '炸雞啤酒慶典', query: 'BBQ Chicken 明洞之星店 首爾' },
+    { name: '黃金牧場 明洞店', place: '明洞', tag: '熟成五花肉・韓牛', query: '황금목장 명동 黃金牧場 明洞' },
+    { name: '北村六景', place: '北村韓屋村', tag: '餛飩麵', query: '북촌 한옥마을 6경 北村韓屋村' },
   ];
 
   const mustBuy = [
-    { name: '人參、紅參', where: '南大門市場・廣藏市場・高麗參專賣店' },
-    { name: '海苔', where: '南大門市場・廣藏市場・伴手禮首選' },
-    { name: '化妝品', where: 'Olive Young 明洞店' },
-    { name: '傳統棉被', where: '廣藏市場・超細纖維・真空打包' },
-    { name: '醃漬海鮮', where: '廣藏市場・醃明太子、章魚' },
-    { name: '凍乾草莓', where: '南大門市場乾貨區' },
-    { name: '韓文印章', where: '仁寺洞・個人化伴手禮' },
+    { name: '人參、紅參', where: '南大門市場・廣藏市場・高麗參專賣店', query: '南大門市場 高麗參專賣店 首爾' },
+    { name: '海苔', where: '南大門市場・廣藏市場・伴手禮首選', query: '南大門市場 首爾' },
+    { name: '化妝品', where: 'Olive Young 明洞店', query: 'Olive Young 明洞 首爾' },
+    { name: '傳統棉被', where: '廣藏市場・超細纖維・真空打包', query: '廣藏市場 棉被 首爾' },
+    { name: '醃漬海鮮', where: '廣藏市場・醃明太子、章魚', query: '廣藏市場 首爾' },
+    { name: '凍乾草莓', where: '南大門市場乾貨區', query: '南大門市場 乾貨 首爾' },
+    { name: '韓文印章', where: '仁寺洞・個人化伴手禮', query: '仁寺洞 首爾' },
   ];
 
   const mustSee = [
-    { name: '景福宮 + 光化門', tag: '朝鮮王朝正宮' },
-    { name: '昌德宮', tag: '世界遺產' },
-    { name: 'N 首爾塔 + 南山纜車', tag: '夜景必看' },
-    { name: '明洞大聖堂', tag: 'Gothic Cathedral' },
-    { name: '清溪川', tag: '城市散步' },
-    { name: '北村韓屋村', tag: '傳統韓屋' },
+    { name: '景福宮 + 光化門', tag: '朝鮮王朝正宮', query: '景福宮 首爾' },
+    { name: '昌德宮', tag: '世界遺產', query: '昌德宮 首爾' },
+    { name: 'N 首爾塔 + 南山纜車', tag: '夜景必看', query: 'N首爾塔 南山纜車' },
+    { name: '明洞大聖堂', tag: 'Gothic Cathedral', query: '明洞聖堂 Myeongdong Cathedral' },
+    { name: '清溪川', tag: '城市散步', query: '清溪川 首爾' },
+    { name: '北村韓屋村', tag: '傳統韓屋', query: '北村韓屋村 Bukchon Hanok Village' },
   ];
 
   const phrases = [
@@ -399,19 +399,30 @@ export default function SeoulJeonjuTrip() {
                   <SubBlock icon={Utensils} label="必吃">
                     <div className="grid sm:grid-cols-2 gap-2">
                       {mustEat.map((m, i) => (
-                        <div key={i} className="p-3 bg-white border-l-4 rounded-r-2xl ink-shadow" style={{ borderLeftColor: '#FFB800' }}>
-                          <div className="font-bold" style={{ color: '#0F4C75' }}>{m.name}</div>
-                          <div className="text-xs text-stone-500 mt-0.5">{m.place} ・ <span className="font-semibold" style={{ color: '#E89B00' }}>{m.tag}</span></div>
-                        </div>
+                        <a key={i} href={mapsLink(m.query)} target="_blank" rel="noreferrer"
+                           className="block p-3 bg-white border-l-4 rounded-r-2xl ink-shadow active:scale-95 transition-transform"
+                           style={{ borderLeftColor: '#FFB800' }}>
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex-1 min-w-0">
+                              <div className="font-bold" style={{ color: '#0F4C75' }}>{m.name}</div>
+                              <div className="text-xs text-stone-500 mt-0.5">{m.place} ・ <span className="font-semibold" style={{ color: '#E89B00' }}>{m.tag}</span></div>
+                            </div>
+                            <MapPin className="w-4 h-4 shrink-0" style={{ color: '#88CCED' }} />
+                          </div>
+                        </a>
                       ))}
                     </div>
                   </SubBlock>
                   <SubBlock icon={ShoppingBag} label="必買">
                     <ul className="space-y-1.5 bg-white p-4 rounded-2xl ink-shadow">
                       {mustBuy.map((m, i) => (
-                        <li key={i} className="flex items-baseline gap-3 py-1 border-b border-dashed border-blue-100 last:border-0">
-                          <span className="font-bold shrink-0" style={{ color: '#0F4C75' }}>{m.name}</span>
-                          <span className="text-xs text-stone-500 ml-auto text-right">{m.where}</span>
+                        <li key={i}>
+                          <a href={mapsLink(m.query)} target="_blank" rel="noreferrer"
+                             className="flex items-baseline gap-3 py-1.5 border-b border-dashed border-blue-100 last:border-0 active:bg-blue-50 -mx-2 px-2 rounded transition-colors">
+                            <span className="font-bold shrink-0" style={{ color: '#0F4C75' }}>{m.name}</span>
+                            <span className="text-xs text-stone-500 ml-auto text-right">{m.where}</span>
+                            <MapPin className="w-3.5 h-3.5 shrink-0 self-center" style={{ color: '#88CCED' }} />
+                          </a>
                         </li>
                       ))}
                     </ul>
@@ -419,10 +430,13 @@ export default function SeoulJeonjuTrip() {
                   <SubBlock icon={Camera} label="必看">
                     <div className="flex flex-wrap gap-2">
                       {mustSee.map((m, i) => (
-                        <div key={i} className="px-3 py-2 text-white text-sm rounded-xl shadow" style={{ background: 'linear-gradient(135deg, #4DA3D6 0%, #6FBEE0 100%)' }}>
+                        <a key={i} href={mapsLink(m.query)} target="_blank" rel="noreferrer"
+                           className="inline-flex items-center gap-2 px-3 py-2 text-white text-sm rounded-xl shadow active:scale-95 transition-transform"
+                           style={{ background: 'linear-gradient(135deg, #4DA3D6 0%, #6FBEE0 100%)' }}>
                           <span className="font-bold">{m.name}</span>
-                          <span className="ml-2 text-xs text-white/80">{m.tag}</span>
-                        </div>
+                          <span className="text-xs text-white/80">{m.tag}</span>
+                          <MapPin className="w-3.5 h-3.5" />
+                        </a>
                       ))}
                     </div>
                   </SubBlock>
