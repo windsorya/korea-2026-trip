@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Phone, MapPin, Plane, Hotel, Car, AlertCircle,
   Utensils, ShoppingBag, Camera, Coffee, Sparkles, Globe,
-  Building2, Scale, Briefcase, Home, Star, Clock, Users, X
+  Building2, Scale, Briefcase, Home, Star, Clock, Users, X, Volume2
 } from 'lucide-react';
 
 export default function SeoulJeonjuTrip() {
@@ -184,13 +184,58 @@ export default function SeoulJeonjuTrip() {
   ];
 
   const phrases = [
-    { zh: '你好', ko: '안녕하세요', pin: 'annyeong-haseyo' },
-    { zh: '謝謝', ko: '감사합니다', pin: 'gamsa-hamnida' },
-    { zh: '對不起', ko: '죄송합니다', pin: 'joesong-hamnida' },
-    { zh: '多少錢', ko: '얼마예요?', pin: 'eolma-yeyo' },
-    { zh: '不用了', ko: '괜찮아요', pin: 'gwaenchan-ayo' },
-    { zh: '乾杯', ko: '건배', pin: 'geon-bae' },
-    { zh: '為了！(正式)', ko: '위하여', pin: 'wi-ha-yeo' },
+    {
+      category: '問候 ・ 基本',
+      icon: '☀️',
+      items: [
+        { zh: '你好', ko: '안녕하세요', pin: 'annyeong-haseyo' },
+        { zh: '早安', ko: '좋은 아침입니다', pin: 'jo-eun a-chim-imnida' },
+        { zh: '晚安（睡前）', ko: '안녕히 주무세요', pin: 'annyeong-hi ju-mu-seyo' },
+        { zh: '再見（你走我留）', ko: '안녕히 가세요', pin: 'annyeong-hi ga-seyo' },
+        { zh: '再見（你留我走）', ko: '안녕히 계세요', pin: 'annyeong-hi gye-seyo' },
+        { zh: '謝謝', ko: '감사합니다', pin: 'gamsa-hamnida' },
+        { zh: '不客氣', ko: '천만에요', pin: 'cheonman-eyo' },
+        { zh: '對不起', ko: '죄송합니다', pin: 'joesong-hamnida' },
+        { zh: '不好意思（叫人）', ko: '저기요', pin: 'jeo-gi-yo' },
+        { zh: '是', ko: '네', pin: 'ne' },
+        { zh: '不是', ko: '아니요', pin: 'a-ni-yo' },
+        { zh: '不用了 / 沒關係', ko: '괜찮아요', pin: 'gwaenchan-ayo' },
+      ],
+    },
+    {
+      category: '社交 ・ 律師團必備',
+      icon: '🤝',
+      items: [
+        { zh: '初次見面', ko: '처음 뵙겠습니다', pin: 'cheoeum bep-gesseum-nida' },
+        { zh: '請多指教', ko: '잘 부탁드립니다', pin: 'jal bu-tak-deurim-nida' },
+        { zh: '我是台灣律師', ko: '저는 대만 변호사입니다', pin: 'jeo-neun dae-man byeon-ho-sa-imnida' },
+        { zh: '見到你很高興', ko: '만나서 반갑습니다', pin: 'manna-seo ban-gap-seum-nida' },
+        { zh: '感謝您的款待', ko: '환대해 주셔서 감사합니다', pin: 'hwan-dae-hae ju-syeo-seo gamsa-hamnida' },
+        { zh: '吃飽了嗎？', ko: '식사하셨어요?', pin: 'sik-sa-ha-syeo-sseo-yo' },
+        { zh: '辛苦了', ko: '수고하셨습니다', pin: 'su-go-ha-syeoss-seum-nida' },
+        { zh: '玩得很開心 / 今天玄了', ko: '재미있었어요', pin: 'jae-mi-i-sseo-sseo-yo' },
+        { zh: '乾杯', ko: '건배', pin: 'geon-bae' },
+        { zh: '為了 ⋯（正式敬酒）', ko: '위하여', pin: 'wi-ha-yeo' },
+      ],
+    },
+    {
+      category: '購物 ・ 自由行必備',
+      icon: '🛍️',
+      items: [
+        { zh: '多少錢？', ko: '얼마예요?', pin: 'eolma-yeyo' },
+        { zh: '太貴了', ko: '너무 비싸요', pin: 'neomu bi-ssa-yo' },
+        { zh: '可以便宜一點嗎？', ko: '좀 깎아 주세요', pin: 'jom kkakka ju-seyo' },
+        { zh: '可以試穿嗎？', ko: '입어봐도 돼요?', pin: 'i-beo-bwa-do dwae-yo' },
+        { zh: '有別的尺寸嗎？', ko: '다른 사이즈 있어요?', pin: 'da-reun sa-i-jeu i-sseo-yo' },
+        { zh: '有別的顏色嗎？', ko: '다른 색깔 있어요?', pin: 'da-reun saek-kkal i-sseo-yo' },
+        { zh: '可以刷卡嗎？', ko: '카드로 결제 돼요?', pin: 'ka-deu-ro gyeol-je dwae-yo' },
+        { zh: '請給我收據', ko: '영수증 주세요', pin: 'yeong-su-jeung ju-seyo' },
+        { zh: '可以退稅嗎？', ko: '택스 환급 돼요?', pin: 'taek-seu hwan-geup dwae-yo' },
+        { zh: '我看看就好', ko: '그냥 볼게요', pin: 'geu-nyang bol-ge-yo' },
+        { zh: '請給我這個', ko: '이거 주세요', pin: 'i-geo ju-seyo' },
+        { zh: '請幫我打包', ko: '포장해 주세요', pin: 'po-jang-hae ju-seyo' },
+      ],
+    },
   ];
 
   // ─────────────────────────────────────────
@@ -198,7 +243,13 @@ export default function SeoulJeonjuTrip() {
   // ─────────────────────────────────────────
   const telLink = (num) => `tel:${num.replace(/[\s-]/g, '')}`;
   const mapsLink = (q) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
-  const naverLink = (q) => `https://map.naver.com/v5/search/${encodeURIComponent(q)}`;
+
+  // 韓語發音：統一開 Google 翻譯播放（最穩、發音最準、所有裝置一致）
+  const speakKorean = (text) => {
+    if (!text) return;
+    const url = `https://translate.google.com/?sl=ko&tl=zh-TW&text=${encodeURIComponent(text)}&op=translate`;
+    window.open(url, '_blank');
+  };
 
   // ─────────────────────────────────────────
   // RENDER
@@ -506,21 +557,46 @@ export default function SeoulJeonjuTrip() {
       {/* ─── PHRASES MODAL ─── */}
       {phrasesOpen && (
         <Modal onClose={() => setPhrasesOpen(false)} title="韓語救急" subtitle="Korean Phrases">
-          <div className="space-y-1">
-            {phrases.map((p, i) => (
-              <div key={i} className="p-3 bg-white border border-blue-100 rounded-xl">
-                <div className="flex items-baseline gap-3">
-                  <span className="text-stone-500 text-xs w-16 shrink-0">{p.zh}</span>
-                  <span className="text-xl font-bold flex-1" style={{ fontFamily: '"Noto Serif KR", serif', color: '#0F4C75' }}>
-                    {p.ko}
-                  </span>
-                  <span className="text-xs italic" style={{ color: '#1E70A8' }}>{p.pin}</span>
-                </div>
-              </div>
-            ))}
+          <div className="mb-3 px-1 text-xs text-stone-500">
+            點 <Volume2 className="w-3 h-3 inline" /> 跳 Google 翻譯播放發音
           </div>
-          <div className="mt-4 text-xs text-stone-500 text-center italic">
-            正式場合敬酒可用「위하여 (wi-ha-yeo)」表達敬意
+          {phrases.map((cat, ci) => (
+            <div key={ci} className="mb-4">
+              <div className="flex items-center gap-2 mb-2 px-1">
+                <span className="text-base">{cat.icon}</span>
+                <span className="text-xs font-bold tracking-[0.2em]" style={{ color: '#1E70A8' }}>
+                  {cat.category}
+                </span>
+                <div className="flex-1 h-px bg-blue-100"></div>
+              </div>
+              <div className="space-y-1">
+                {cat.items.map((p, i) => (
+                  <div key={i} className="p-3 bg-white border border-blue-100 rounded-xl">
+                    <div className="flex items-center gap-2">
+                      <div className="text-xs text-stone-500 w-20 shrink-0">{p.zh}</div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-lg font-bold leading-tight" style={{ fontFamily: '"Noto Serif KR", serif', color: '#0F4C75' }}>
+                          {p.ko}
+                        </div>
+                        <div className="text-[11px] italic mt-0.5" style={{ color: '#1E70A8' }}>
+                          {p.pin}
+                        </div>
+                      </div>
+                      <button onClick={() => speakKorean(p.ko)}
+                        className="shrink-0 w-9 h-9 flex items-center justify-center rounded-full text-white shadow active:scale-90 transition-transform"
+                        style={{ background: 'linear-gradient(135deg, #4DA3D6 0%, #6FBEE0 100%)' }}
+                        aria-label="播放發音">
+                        <Volume2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+          <div className="mt-2 p-3 rounded-xl text-xs leading-relaxed" style={{ background: '#FEF6E0', color: '#7A4D00' }}>
+            ⓘ <strong>正式敬酒</strong>用「위하여」，比「乾杯」更得體<br />
+            ⓘ 點 <Volume2 className="w-3 h-3 inline" /> 會跳到 Google 翻譯播放發音（按播放鍵聽韓語）
           </div>
         </Modal>
       )}
