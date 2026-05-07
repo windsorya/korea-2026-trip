@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Phone, MapPin, Plane, Hotel, Car, AlertCircle,
   Utensils, ShoppingBag, Camera, Coffee, Sparkles, Globe,
-  Building2, Scale, Briefcase, Home, Star, Clock, Users, X, Volume2
+  Building2, Scale, Briefcase, Home, Star, Clock, Users, X, Volume2, Navigation
 } from 'lucide-react';
 
 export default function SeoulJeonjuTrip() {
@@ -1089,11 +1089,30 @@ function DayView({ day, details }) {
                   item.formal ? { background: '#FEF6E0', borderLeftColor: '#FFB800' } :
                   item.highlight ? { background: 'linear-gradient(135deg, #4DA3D6 0%, #6FBEE0 100%)' } : {}
                 }>
-                  <div className={`font-bold text-sm leading-snug`} style={item.formal ? { color: '#7A4D00' } : !item.highlight ? { color: '#0F4C75' } : {}}>{item.title}</div>
-                  <div className={`text-xs mt-1`} style={
-                    item.formal ? { color: '#9A6300' } :
-                    item.highlight ? { color: 'rgba(255,255,255,0.85)' } : { color: '#78716c' }
-                  }>{item.sub}</div>
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1 min-w-0">
+                      <div className={`font-bold text-sm leading-snug`} style={item.formal ? { color: '#7A4D00' } : !item.highlight ? { color: '#0F4C75' } : {}}>{item.title}</div>
+                      <div className={`text-xs mt-1`} style={
+                        item.formal ? { color: '#9A6300' } :
+                        item.highlight ? { color: 'rgba(255,255,255,0.85)' } : { color: '#78716c' }
+                      }>{item.sub}</div>
+                    </div>
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.title)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      aria-label={`導航到 ${item.title}`}
+                      className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition active:scale-95"
+                      style={
+                        item.formal ? { background: '#FFB800', color: '#fff' } :
+                        item.highlight ? { background: 'rgba(255,255,255,0.25)', color: '#fff' } :
+                        { background: '#E8F4FB', color: '#1E70A8' }
+                      }
+                    >
+                      <Navigation className="w-4 h-4" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
