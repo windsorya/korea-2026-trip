@@ -71,7 +71,7 @@ export default function SeoulJeonjuTrip() {
       address: '145 Toegye-ro, Jung District, Seoul',
       tel: '+82-2-773-6000',
       code: '26171059（MR. HO/CHUNGMIN 名下）',
-      mapsQuery: 'Sejong Hotel Seoul Myeongdong',
+      mapsQuery: '세종호텔 명동',
     },
     {
       name: 'Lahan Hotel Jeonju',
@@ -80,7 +80,7 @@ export default function SeoulJeonjuTrip() {
       address: '85 Girin-daero, Wansan-gu, Jeonju-si, Jeollabuk-do',
       tel: '+82-63-232-7000',
       code: '6 組房號 26008814 / 15 / 16 / 30 / 32 / 35',
-      mapsQuery: 'Lahan Hotel Jeonju',
+      mapsQuery: '라한호텔 전주',
     },
   ];
 
@@ -97,22 +97,22 @@ export default function SeoulJeonjuTrip() {
       schedule: [
         { time: '08:50', title: '清泉崗國際機場集合', sub: '國際線建議 1.5-2h 前抵達・週末人潮+伴手禮分配', icon: Users, highlight: true },
         { time: '10:40', title: 'LJ736 起飛', sub: '台中清泉崗 T1 → 仁川 T2', icon: Plane },
-        { time: '14:15', title: '抵達仁川機場', sub: '入境 → 接駁集合', icon: MapPin },
+        { time: '14:15', title: '抵達仁川機場', sub: '入境 → 接駁集合', icon: MapPin, mapsQuery: '인천국제공항 제2터미널' },
         { time: '14:15', title: '金先生接駁', sub: '黑色 8150 → Sejong Hotel', icon: Car },
-        { time: '15:00', title: 'Sejong Hotel Check-in', sub: '訂房代號 26171059', icon: Hotel },
-        { time: '18:00', title: '晚餐：黃金牧場 明洞店', sub: '12 人韓牛・熟成五花肉・專人代烤', icon: Utensils, highlight: true },
-        { time: '20:15', title: '南山纜車 + N 首爾塔', sub: '夜景場次', icon: Sparkles },
+        { time: '15:00', title: 'Sejong Hotel Check-in', sub: '訂房代號 26171059', icon: Hotel, mapsQuery: '세종호텔 명동' },
+        { time: '18:00', title: '晚餐：黃金牧場 明洞店', sub: '12 人韓牛・熟成五花肉・專人代烤', icon: Utensils, highlight: true, mapsQuery: '황금목장 명동점' },
+        { time: '20:15', title: '南山纜車 + N 首爾塔', sub: '夜景場次', icon: Sparkles, mapsQuery: 'N서울타워' },
       ],
     },
     '0510': {
       title: '首爾自由行 ・ 四種路線可選',
       note: '主推明洞線（米其林餃子＋NANTA＋Chimaek 慶典）。其他三條替代路線見下方。',
       schedule: [
-        { time: '09:30', title: '北村韓屋村 晨間散策', sub: '傳統韓屋聚落・拍照點', icon: Camera },
-        { time: '12:00', title: '明洞餃子 米其林午餐', sub: '必比登推薦', icon: Utensils },
-        { time: '14:00', title: '明洞自由採買 + 大聖堂', sub: 'Olive Young・繁華商圈', icon: ShoppingBag },
-        { time: '17:00', title: 'NANTA 亂打秀', sub: '明洞 ANT 秀劇場・震撼全場', icon: Sparkles, highlight: true },
-        { time: '19:00', title: 'BBQ Chicken 明洞之星店', sub: '12 人 Chimaek 終極慶典', icon: Utensils },
+        { time: '09:30', title: '北村韓屋村 晨間散策', sub: '傳統韓屋聚落・拍照點', icon: Camera, mapsQuery: '북촌한옥마을' },
+        { time: '12:00', title: '明洞餃子 米其林午餐', sub: '必比登推薦', icon: Utensils, mapsQuery: '명동교자 본점' },
+        { time: '14:00', title: '明洞自由採買 + 大聖堂', sub: 'Olive Young・繁華商圈', icon: ShoppingBag, mapsQuery: '명동성당' },
+        { time: '17:00', title: 'NANTA 亂打秀', sub: '明洞 ANT 秀劇場・震撼全場', icon: Sparkles, highlight: true, mapsQuery: '난타전용극장 명동' },
+        { time: '19:00', title: 'BBQ Chicken 明洞之星店', sub: '12 人 Chimaek 終極慶典', icon: Utensils, mapsQuery: 'BBQ치킨 명동스타점' },
       ],
       alternatives: [
         { name: '替代 A・廣藏市場線', detail: '美食馬拉松 → 棉被／醃海鮮 → 清溪川 → 東大門 DDP' },
@@ -123,12 +123,12 @@ export default function SeoulJeonjuTrip() {
     '0511': {
       title: '南下全州 ・ 韓食之都',
       schedule: [
-        { time: '07:00', title: '飯店附近早餐', sub: '出發前用餐', icon: Coffee },
+        { time: '07:00', title: '飯店附近早餐', sub: '出發前用餐', icon: Coffee, mapsQuery: '세종호텔 명동' },
         { time: '09:00', title: 'Sejong Hotel 集合・接駁出發', sub: '金先生 → 公路旅行', icon: Car },
-        { time: '11:30', title: '抵達全羅北道', sub: '中途休息站必買核桃燒', icon: MapPin },
-        { time: '13:00', title: 'Lahan Hotel 韓方迎接', sub: '姜信武律師、朴鎰址律師', icon: Hotel, highlight: true },
+        { time: '11:30', title: '抵達全羅北道', sub: '中途休息站必買核桃燒', icon: MapPin, mapsQuery: '전주' },
+        { time: '13:00', title: 'Lahan Hotel 韓方迎接', sub: '姜信武律師、朴鎰址律師', icon: Hotel, highlight: true, mapsQuery: '라한호텔 전주' },
         { time: '13:30', title: '午餐', sub: '韓方安排', icon: Utensils },
-        { time: '15:00', title: '全州韓屋村自由活動', sub: '韓服拍照・韓紙工藝・冰沙', icon: Camera },
+        { time: '15:00', title: '全州韓屋村自由活動', sub: '韓服拍照・韓紙工藝・冰沙', icon: Camera, mapsQuery: '전주한옥마을' },
         { time: '18:00', title: '五花肉晚餐', sub: '全羅北道律師協會 國際交流委員會委員長作陪', icon: Utensils, highlight: true },
       ],
     },
@@ -136,8 +136,8 @@ export default function SeoulJeonjuTrip() {
       title: '官方交流日 ・ 兩會國際交流',
       note: '本日為訪問重點。法院、檢察院為正式外交場合,請著正裝。詳細流程由韓方提供,點下方藍色卡片展開細節。',
       schedule: [
-        { time: '07:00', title: '早餐', sub: '飯店或全州解酒豆芽湯飯店', icon: Coffee },
-        { time: '11:00', title: '慶基殿 文化參觀', sub: '1410 年朝鮮太宗 11 年建・供奉太祖李成桂御真・中文導覽預訂中', icon: Building2 },
+        { time: '07:00', title: '早餐', sub: '飯店或全州解酒豆芽湯飯店', icon: Coffee, mapsQuery: '라한호텔 전주' },
+        { time: '11:00', title: '慶基殿 文化參觀', sub: '1410 年朝鮮太宗 11 年建・供奉太祖李成桂御真・中文導覽預訂中', icon: Building2, mapsQuery: '경기전' },
         { time: '12:00', title: '午餐', sub: '姜信武、朴鎰址作陪', icon: Utensils },
         { time: '14:00', title: '全州地方法院 拜會法院長', sub: '14:00 抵達 → 14:05 參觀審判設施 → 14:30 與法院長談話 → 14:40 歡送 ⚠️ 家屬在咨詢室等待', icon: Scale, highlight: true, formal: true, expandKey: 'court' },
         { time: '15:00', title: '全州地方檢察院 拜會檢察長', sub: '15:00 與檢察長談話(7樓中會議室,家屬一起) → 15:10 參觀檢察院 → 15:25 合影贈禮(3樓大會議室)', icon: Briefcase, highlight: true, formal: true, expandKey: 'prosecutor' },
@@ -148,7 +148,7 @@ export default function SeoulJeonjuTrip() {
     '0513': {
       title: '送別 ・ 歸國',
       schedule: [
-        { time: '06:30', title: 'Lahan Hotel 送別', sub: '姜信武律師、朴鎰址律師', icon: Hotel },
+        { time: '06:30', title: 'Lahan Hotel 送別', sub: '姜信武律師、朴鎰址律師', icon: Hotel, mapsQuery: '라한호텔 전주' },
         { time: '08:00', title: '接駁出發', sub: 'Lahan Hotel → 仁川機場', icon: Car },
         { time: '14:50', title: 'LJ737 起飛', sub: '仁川 T2 → 台中清泉崗 T1', icon: Plane },
         { time: '16:30', title: '抵達台灣', sub: '結束 5 天 4 夜行程', icon: Home },
@@ -157,33 +157,33 @@ export default function SeoulJeonjuTrip() {
   };
 
   const mustEat = [
-    { name: '富村生牛肉', place: '廣藏市場', tag: '米其林・生拌活章魚', query: '富村生牛肉 廣藏市場 首爾' },
-    { name: '順熙家綠豆煎餅', place: '廣藏市場', tag: '廣藏市場靈魂', query: '順熙家 綠豆煎餅 廣藏市場' },
-    { name: '麻藥紫菜飯捲', place: '廣藏市場', tag: '沾芥末醬中毒', query: '麻藥紫菜飯捲 廣藏市場' },
-    { name: '土俗村參雞湯', place: '景福宮旁', tag: 'Ginseng Chicken', query: '土俗村蔘雞湯 首爾' },
-    { name: '明洞餃子', place: '明洞', tag: '米其林必比登', query: '明洞餃子 본점 首爾' },
-    { name: 'BBQ Chicken 明洞之星', place: '明洞', tag: '炸雞啤酒慶典', query: 'BBQ Chicken 明洞之星店 首爾' },
-    { name: '黃金牧場 明洞店', place: '明洞', tag: '熟成五花肉・韓牛', query: '황금목장 명동 黃金牧場 明洞' },
-    { name: '北村六景', place: '北村韓屋村', tag: '餛飩麵', query: '북촌 한옥마을 6경 北村韓屋村' },
+    { name: '富村生牛肉', place: '廣藏市場', tag: '米其林・生拌活章魚', query: '부촌육회 광장시장' },
+    { name: '順熙家綠豆煎餅', place: '廣藏市場', tag: '廣藏市場靈魂', query: '순희네 빈대떡' },
+    { name: '麻藥紫菜飯捲', place: '廣藏市場', tag: '沾芥末醬中毒', query: '마약김밥 광장시장' },
+    { name: '土俗村參雞湯', place: '景福宮旁', tag: 'Ginseng Chicken', query: '토속촌 삼계탕' },
+    { name: '明洞餃子', place: '明洞', tag: '米其林必比登', query: '명동교자 본점' },
+    { name: 'BBQ Chicken 明洞之星', place: '明洞', tag: '炸雞啤酒慶典', query: 'BBQ치킨 명동스타점' },
+    { name: '黃金牧場 明洞店', place: '明洞', tag: '熟成五花肉・韓牛', query: '황금목장 명동점' },
+    { name: '北村六景', place: '北村韓屋村', tag: '餛飩麵', query: '북촌한옥마을' },
   ];
 
   const mustBuy = [
-    { name: '人參、紅參', where: '南大門市場・廣藏市場・高麗參專賣店', query: '南大門市場 高麗參專賣店 首爾' },
-    { name: '海苔', where: '南大門市場・廣藏市場・伴手禮首選', query: '南大門市場 首爾' },
-    { name: '化妝品', where: 'Olive Young 明洞店', query: 'Olive Young 明洞 首爾' },
-    { name: '傳統棉被', where: '廣藏市場・超細纖維・真空打包', query: '廣藏市場 棉被 首爾' },
-    { name: '醃漬海鮮', where: '廣藏市場・醃明太子、章魚', query: '廣藏市場 首爾' },
-    { name: '凍乾草莓', where: '南大門市場乾貨區', query: '南大門市場 乾貨 首爾' },
-    { name: '韓文印章', where: '仁寺洞・個人化伴手禮', query: '仁寺洞 首爾' },
+    { name: '人參、紅參', where: '南大門市場・廣藏市場・高麗參專賣店', query: '남대문시장 인삼' },
+    { name: '海苔', where: '南大門市場・廣藏市場・伴手禮首選', query: '남대문시장' },
+    { name: '化妝品', where: 'Olive Young 明洞店', query: '올리브영 명동' },
+    { name: '傳統棉被', where: '廣藏市場・超細纖維・真空打包', query: '광장시장 이불' },
+    { name: '醃漬海鮮', where: '廣藏市場・醃明太子、章魚', query: '광장시장' },
+    { name: '凍乾草莓', where: '南大門市場乾貨區', query: '남대문시장' },
+    { name: '韓文印章', where: '仁寺洞・個人化伴手禮', query: '인사동' },
   ];
 
   const mustSee = [
-    { name: '景福宮 + 光化門', tag: '朝鮮王朝正宮', query: '景福宮 首爾' },
-    { name: '昌德宮', tag: '世界遺產', query: '昌德宮 首爾' },
-    { name: 'N 首爾塔 + 南山纜車', tag: '夜景必看', query: 'N首爾塔 南山纜車' },
-    { name: '明洞大聖堂', tag: 'Gothic Cathedral', query: '明洞聖堂 Myeongdong Cathedral' },
-    { name: '清溪川', tag: '城市散步', query: '清溪川 首爾' },
-    { name: '北村韓屋村', tag: '傳統韓屋', query: '北村韓屋村 Bukchon Hanok Village' },
+    { name: '景福宮 + 光化門', tag: '朝鮮王朝正宮', query: '경복궁' },
+    { name: '昌德宮', tag: '世界遺產', query: '창덕궁' },
+    { name: 'N 首爾塔 + 南山纜車', tag: '夜景必看', query: 'N서울타워' },
+    { name: '明洞大聖堂', tag: 'Gothic Cathedral', query: '명동성당' },
+    { name: '清溪川', tag: '城市散步', query: '청계천' },
+    { name: '北村韓屋村', tag: '傳統韓屋', query: '북촌한옥마을' },
   ];
 
   const phrases = [
@@ -1147,8 +1147,6 @@ function DayView({ day, details, expandedDetail, setExpandedDetail }) {
   if (!day || !details) return null;
   const Icon = day.icon;
   const mapsLink = (q) => `https://map.naver.com/p/search/${encodeURIComponent(q)}`;
-  const NON_LOCATION_ICONS = new Set([Plane, Car]);
-  const hasLocation = (item) => !NON_LOCATION_ICONS.has(item.icon);
 
   return (
     <div className="fade-up">
@@ -1226,12 +1224,12 @@ function DayView({ day, details, expandedDetail, setExpandedDetail }) {
                         {isExpanded ? '收起 ▲' : '詳細 ▼'}
                       </span>
                     )}
-                    {!isExpandable && hasLocation(item) && (
+                    {!isExpandable && item.mapsQuery && (
                       <span
                         role="button"
                         tabIndex={0}
-                        onClick={(e) => { e.stopPropagation(); window.open(mapsLink(item.mapsQuery || item.title), '_blank'); }}
-                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); window.open(mapsLink(item.mapsQuery || item.title), '_blank'); } }}
+                        onClick={(e) => { e.stopPropagation(); window.open(mapsLink(item.mapsQuery), '_blank'); }}
+                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); window.open(mapsLink(item.mapsQuery), '_blank'); } }}
                         className="shrink-0 inline-flex items-center gap-1 text-xs font-bold px-2 py-1 rounded-full cursor-pointer active:scale-95 transition-transform"
                         style={{
                           background: item.highlight ? 'rgba(255,255,255,0.95)' : 'linear-gradient(135deg, #4DA3D6 0%, #6FBEE0 100%)',
