@@ -972,9 +972,9 @@ function Hotspot({ top, left, label, query }) {
       aria-label={`查看 ${label}`}
     >
       {/* 脈動光環(縮小+更柔和) */}
-      <span className="absolute inset-0 rounded-full animate-ping" style={{ background: '#FFB800', opacity: 0.3 }}></span>
-      {/* 主要圓點(從 w-5 h-5 縮小到 w-3 h-3) */}
-      <span className="relative block w-3 h-3 rounded-full border border-white shadow-md active:scale-90 transition-transform"
+      <span className="absolute inset-0 rounded-full animate-ping" style={{ background: '#FFB800', opacity: 0.2 }}></span>
+      {/* 主要圓點(w-2.5 h-2.5 = 10px) */}
+      <span className="relative block w-2.5 h-2.5 rounded-full border border-white shadow-md active:scale-90 transition-transform"
         style={{ background: 'linear-gradient(135deg, #FF6B35 0%, #FFB800 100%)' }}>
       </span>
       {/* 標籤(桌面 hover 才出現) */}
