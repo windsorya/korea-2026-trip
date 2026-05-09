@@ -35,12 +35,14 @@ export default function SeoulJeonjuTrip() {
                        window.navigator.standalone === true;
     setIsStandalone(standalone);
 
-    // iOS Safari 偵測（iOS 不支援 beforeinstallprompt，必須走教學 modal）
-    const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    setIsIOS(ios);
+    // iOS Safari 偵測（iOS 不支援 beforeinstallprompt,必須走教學 modal）
+    // 注意:iPadOS 13+ Safari 預設用 desktop UA,要靠 maxTouchPoints fallback
+    const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    setIsIOS(ios && !window.MSStream);
 
     // 使用者關過 banner 就記住
-    if (localStorage.getItem('installDismissed') === '1') setInstallDismissed(true);
+    if (localStorage.getItem('installDismissed_v2') === '1') setInstallDismissed(true);
 
     // Android Chrome / Edge：beforeinstallprompt 事件 — 存起來等使用者點按鈕觸發
     const handler = (e) => { e.preventDefault(); setInstallPrompt(e); };
@@ -74,10 +76,12 @@ export default function SeoulJeonjuTrip() {
 
   const dismissInstall = () => {
     setInstallDismissed(true);
-    localStorage.setItem('installDismissed', '1');
+    localStorage.setItem('installDismissed_v2', '1');
   };
 
-  const showInstallBanner = !isStandalone && !installDismissed && (installPrompt || isIOS);
+  // 顯示條件放寬:只要不是 standalone 且未 dismiss 就顯示。
+  // 點擊時依 installPrompt 是否存在動態決定走系統 prompt 或教學 modal。
+  const showInstallBanner = !isStandalone && !installDismissed;
 
   // ─────────────────────────────────────────
   // DATA
@@ -379,6 +383,36 @@ export default function SeoulJeonjuTrip() {
         <div className="h-3 wave-divider opacity-30"></div>
       </header>
 
+      {/* INSTALL TO HOME SCREEN BANNER (放在 quick actions 之前最顯眼處) */}
+      {showInstallBanner && (
+        <div className="relative z-10 max-w-3xl mx-auto px-3 -mt-3 mb-3">
+          <button onClick={handleInstallClick}
+                  className="w-full rounded-2xl px-4 py-3 ink-shadow flex items-center gap-3 active:scale-[0.98] transition-transform animate-pulse-once"
+                  style={{ background: 'linear-gradient(135deg, #FFB800 0%, #FFD24A 100%)', border: '3px solid white' }}>
+            <div className="text-3xl shrink-0">📲</div>
+            <div className="flex-1 min-w-0 text-left">
+              <div className="font-extrabold text-base leading-tight" style={{ color: '#7A4D00' }}>
+                加入主畫面・離線也能看
+              </div>
+              <div className="text-xs mt-0.5 font-semibold" style={{ color: '#9A6300' }}>
+                {isIOS ? '👉 點此查看 iPhone 三步驟教學' : '👉 點此一鍵安裝(Android)/看教學(其他)'}
+              </div>
+            </div>
+            <span className="shrink-0 bg-white px-3 py-2 text-sm font-extrabold rounded-xl shadow"
+                  style={{ color: '#7A4D00' }}>
+              {isIOS ? '教學' : '安裝'}
+            </span>
+            <span onClick={(e) => { e.stopPropagation(); dismissInstall(); }}
+                  role="button" tabIndex={0}
+                  className="shrink-0 p-1 active:opacity-50 cursor-pointer"
+                  style={{ color: '#7A4D00' }}
+                  aria-label="關閉">
+              <X className="w-4 h-4" />
+            </span>
+          </button>
+        </div>
+      )}
+
       {/* QUICK ACTIONS（浮起卡片）*/}
       <div className="relative z-10 max-w-3xl mx-auto px-3 -mt-6 grid grid-cols-4 gap-2">
         <button onClick={() => setEmergencyOpen(true)}
@@ -403,32 +437,6 @@ export default function SeoulJeonjuTrip() {
           <span className="text-[10px] tracking-wider font-bold" style={{ color: '#1E70A8' }}>韓語</span>
         </button>
       </div>
-
-      {/* INSTALL TO HOME SCREEN BANNER */}
-      {showInstallBanner && (
-        <div className="relative z-10 max-w-3xl mx-auto px-3 mt-3">
-          <div className="rounded-2xl px-4 py-3 ink-shadow flex items-center gap-3"
-               style={{ background: 'linear-gradient(135deg, #FFB800 0%, #FFD24A 100%)' }}>
-            <div className="text-2xl shrink-0">📲</div>
-            <div className="flex-1 min-w-0 text-white">
-              <div className="font-extrabold text-sm leading-tight">加入主畫面・隨時開啟</div>
-              <div className="text-xs opacity-95 mt-0.5">
-                {isIOS ? 'iPhone：點下方「看教學」三步驟完成' : 'Android：一鍵安裝到主畫面'}
-              </div>
-            </div>
-            <button onClick={handleInstallClick}
-                    className="shrink-0 bg-white px-3 py-2 text-sm font-extrabold rounded-xl active:scale-95 transition-transform"
-                    style={{ color: '#7A4D00' }}>
-              {isIOS ? '看教學' : '安裝'}
-            </button>
-            <button onClick={dismissInstall}
-                    className="shrink-0 text-white/90 active:text-white p-1"
-                    aria-label="關閉安裝提示">
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* ─── DAY TABS ─── */}
       <nav className="sticky top-0 z-30 mt-4 px-3">
