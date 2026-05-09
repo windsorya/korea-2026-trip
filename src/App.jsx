@@ -245,7 +245,7 @@ export default function SeoulJeonjuTrip() {
   // HELPERS
   // ─────────────────────────────────────────
   const telLink = (num) => `tel:${num.replace(/[\s-]/g, '')}`;
-  const mapsLink = (q) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+  const mapsLink = (q) => `https://map.naver.com/p/search/${encodeURIComponent(q)}`;
 
   // 韓語發音：統一開 Google 翻譯播放（最穩、發音最準、所有裝置一致）
   const speakKorean = (text) => {
@@ -530,7 +530,7 @@ export default function SeoulJeonjuTrip() {
                 {mapCity === 'seoul' && (
                   <Section title="首爾旅遊地圖" subtitle="Seoul Travel Map · 飯店 3 公里半徑">
                     <p className="text-xs text-stone-500 mb-3 px-1">
-                      📍 中心點:世宗飯店 · 點圖中地標跳 Google Maps · 點圖放大看細節
+                      📍 中心點:世宗飯店 · 點圖中地標跳 Naver Map · 點圖放大看細節
                     </p>
 
                     <div className="relative rounded-2xl overflow-hidden ink-shadow bg-white">
@@ -720,8 +720,6 @@ export default function SeoulJeonjuTrip() {
           <DayView
             day={days.find(d => d.id === activeDay)}
             details={dayDetails[activeDay]}
-            expandedDetail={expandedDetail}
-            setExpandedDetail={setExpandedDetail}
           />
         )}
       </main>
@@ -848,7 +846,7 @@ function OverviewPill({ active, onClick, icon: Icon, label, sub }) {
   );
 }
 
-// 地圖熱點：點擊跳 Google Maps 導航
+// 地圖熱點：點擊跳 Naver Map 導航
 // 5/12 法院拜會詳細流程
 function CourtDetail() {
   return (
@@ -961,7 +959,7 @@ function DetailRow({ time, title, desc }) {
 function Hotspot({ top, left, label, query }) {
   const handleClick = (e) => {
     e.stopPropagation(); // 不要觸發父層的 lightbox open
-    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+    const url = `https://map.naver.com/p/search/${encodeURIComponent(query)}`;
     window.open(url, '_blank');
   };
   return (
@@ -972,9 +970,9 @@ function Hotspot({ top, left, label, query }) {
       aria-label={`查看 ${label}`}
     >
       {/* 脈動光環(縮小+更柔和) */}
-      <span className="absolute inset-0 rounded-full animate-ping" style={{ background: '#FFB800', opacity: 0.2 }}></span>
-      {/* 主要圓點(w-2.5 h-2.5 = 10px) */}
-      <span className="relative block w-2.5 h-2.5 rounded-full border border-white shadow-md active:scale-90 transition-transform"
+      <span className="absolute inset-0 rounded-full animate-ping" style={{ background: '#FFB800', opacity: 0.3 }}></span>
+      {/* 主要圓點(從 w-5 h-5 縮小到 w-3 h-3) */}
+      <span className="relative block w-3 h-3 rounded-full border border-white shadow-md active:scale-90 transition-transform"
         style={{ background: 'linear-gradient(135deg, #FF6B35 0%, #FFB800 100%)' }}>
       </span>
       {/* 標籤(桌面 hover 才出現) */}
@@ -1065,7 +1063,7 @@ function FlightCard({ label, data }) {
 
 function HotelCard({ data }) {
   const telLink = (num) => `tel:${num.replace(/[\s-]/g, '')}`;
-  const mapsLink = (q) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+  const mapsLink = (q) => `https://map.naver.com/p/search/${encodeURIComponent(q)}`;
   return (
     <div className="bg-white border border-blue-100 ink-shadow p-5 rounded-2xl">
       <div className="flex items-start gap-3 mb-3">
@@ -1143,7 +1141,7 @@ function Note({ children }) {
   );
 }
 
-function DayView({ day, details, expandedDetail, setExpandedDetail }) {
+function DayView({ day, details }) {
   if (!day || !details) return null;
   const Icon = day.icon;
 
