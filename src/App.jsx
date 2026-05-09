@@ -1146,6 +1146,9 @@ function Note({ children }) {
 function DayView({ day, details, expandedDetail, setExpandedDetail }) {
   if (!day || !details) return null;
   const Icon = day.icon;
+  const mapsLink = (q) => `https://map.naver.com/p/search/${encodeURIComponent(q)}`;
+  const NON_LOCATION_ICONS = new Set([Plane, Car]);
+  const hasLocation = (item) => !NON_LOCATION_ICONS.has(item.icon);
 
   return (
     <div className="fade-up">
@@ -1221,6 +1224,22 @@ function DayView({ day, details, expandedDetail, setExpandedDetail }) {
                         color: item.formal ? 'white' : 'white'
                       }}>
                         {isExpanded ? '收起 ▲' : '詳細 ▼'}
+                      </span>
+                    )}
+                    {!isExpandable && hasLocation(item) && (
+                      <span
+                        role="button"
+                        tabIndex={0}
+                        onClick={(e) => { e.stopPropagation(); window.open(mapsLink(item.mapsQuery || item.title), '_blank'); }}
+                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); window.open(mapsLink(item.mapsQuery || item.title), '_blank'); } }}
+                        className="shrink-0 inline-flex items-center gap-1 text-xs font-bold px-2 py-1 rounded-full cursor-pointer active:scale-95 transition-transform"
+                        style={{
+                          background: item.highlight ? 'rgba(255,255,255,0.95)' : 'linear-gradient(135deg, #4DA3D6 0%, #6FBEE0 100%)',
+                          color: item.highlight ? '#1E70A8' : 'white'
+                        }}
+                      >
+                        <MapPin className="w-3 h-3" />
+                        導航
                       </span>
                     )}
                   </div>
