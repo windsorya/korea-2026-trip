@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Phone, MapPin, Plane, Hotel, Car, AlertCircle,
   Utensils, ShoppingBag, Camera, Coffee, Sparkles, Globe,
-  Building2, Scale, Briefcase, Home, Star, Clock, Users, X, Volume2, Navigation
+  Building2, Scale, Briefcase, Home, Star, Clock, Users, X, Volume2
 } from 'lucide-react';
 
 export default function SeoulJeonjuTrip() {
@@ -13,6 +13,7 @@ export default function SeoulJeonjuTrip() {
   const [overviewTab, setOverviewTab] = useState('essentials'); // essentials | guide | map | info
   const [mapOpen, setMapOpen] = useState(false); // lightbox 開關
   const [mapCity, setMapCity] = useState('seoul'); // seoul | jeonju
+  const [expandedDetail, setExpandedDetail] = useState(null); // 5/12 拜會詳細流程展開: court | prosecutor | bar | null
 
   useEffect(() => {
     const departure = new Date('2026-05-09T10:40:00+08:00');
@@ -110,21 +111,7 @@ export default function SeoulJeonjuTrip() {
         { time: '09:30', title: '北村韓屋村 晨間散策', sub: '傳統韓屋聚落・拍照點', icon: Camera },
         { time: '12:00', title: '明洞餃子 米其林午餐', sub: '必比登推薦', icon: Utensils },
         { time: '14:00', title: '明洞自由採買 + 大聖堂', sub: 'Olive Young・繁華商圈', icon: ShoppingBag },
-        { time: '17:00', title: 'NANTA 亂打秀', sub: '明洞劇場・震撼全場', icon: Sparkles, highlight: true,
-          booking: {
-            source: 'KKday',
-            venue: '明洞劇場（注意：非弘大劇場）',
-            seat: 'S 區（1 樓 / 2 樓前方）',
-            qty: '7 張',
-            orderNo: '26KK296040710',
-            confirmNo: '2605070024',
-            rep: 'chungmin, ho',
-            enter: '16:50 入場（開演前 10 分鐘）',
-            tel: '+82 02-7398-288',
-            telLabel: '當地服務商 (주)피엠씨프러덕션',
-            rules: '禁止拍照／錄影・3 歲以上・走錯劇場恕不退款',
-          }
-        },
+        { time: '17:00', title: 'NANTA 亂打秀', sub: '明洞 ANT 秀劇場・震撼全場', icon: Sparkles, highlight: true },
         { time: '19:00', title: 'BBQ Chicken 明洞之星店', sub: '12 人 Chimaek 終極慶典', icon: Utensils },
       ],
       alternatives: [
@@ -147,14 +134,14 @@ export default function SeoulJeonjuTrip() {
     },
     '0512': {
       title: '官方交流日 ・ 兩會國際交流',
-      note: '本日為訪問重點。法院、檢察院為正式外交場合，請著正裝。',
+      note: '本日為訪問重點。法院、檢察院為正式外交場合,請著正裝。詳細流程由韓方提供,點下方藍色卡片展開細節。',
       schedule: [
         { time: '07:00', title: '早餐', sub: '飯店或全州解酒豆芽湯飯店', icon: Coffee },
         { time: '11:00', title: '慶基殿 文化參觀', sub: '1410 年朝鮮太宗 11 年建・供奉太祖李成桂御真・中文導覽預訂中', icon: Building2 },
         { time: '12:00', title: '午餐', sub: '姜信武、朴鎰址作陪', icon: Utensils },
-        { time: '14:00', title: '全州地方法院 拜會法院長', sub: '喝茶・參觀法院・正式外交', icon: Scale, highlight: true, formal: true },
-        { time: '15:00', title: '全州地方檢察院 拜會檢察長', sub: '喝茶・參觀檢察院・正式外交', icon: Briefcase, highlight: true, formal: true },
-        { time: '16:00', title: '全羅北道律師協會會館', sub: '兩會國際交流活動・會長等出席', icon: Users, highlight: true, formal: true },
+        { time: '14:00', title: '全州地方法院 拜會法院長', sub: '14:00 抵達 → 14:05 參觀審判設施 → 14:30 與法院長談話 → 14:40 歡送 ⚠️ 家屬在咨詢室等待', icon: Scale, highlight: true, formal: true, expandKey: 'court' },
+        { time: '15:00', title: '全州地方檢察院 拜會檢察長', sub: '15:00 與檢察長談話(7樓中會議室,家屬一起) → 15:10 參觀檢察院 → 15:25 合影贈禮(3樓大會議室)', icon: Briefcase, highlight: true, formal: true, expandKey: 'prosecutor' },
+        { time: '16:00', title: '全羅北道律師協會會館 交流會', sub: '開幕詞 → 出席介紹 → 情況匯報 → 互贈禮品 → 合影 → 閉幕', icon: Users, highlight: true, formal: true, expandKey: 'bar' },
         { time: '18:00', title: '晚餐', sub: '全羅北道律師協會會長作陪', icon: Utensils, highlight: true },
       ],
     },
@@ -613,10 +600,6 @@ export default function SeoulJeonjuTrip() {
                 {/* 必逛/必買/必吃 重點(只在首爾顯示) */}
                 {mapCity === 'seoul' && (
                   <Section title="飯店 3 公里範圍重點" subtitle="Quick Reference">
-                    <div className="mb-3 px-3 py-2 rounded-lg text-xs flex items-center gap-1.5" style={{ background: '#FEF6E0', color: '#7A4D00' }}>
-                      <Navigation className="w-3.5 h-3.5 shrink-0" />
-                      <span>輕觸任一藍色項目即可開啟 Google Maps 導航</span>
-                    </div>
                     <div className="grid grid-cols-1 gap-3">
                       <div className="p-4 rounded-2xl bg-white border border-blue-100 ink-shadow">
                         <div className="flex items-center gap-2 mb-2">
@@ -624,7 +607,7 @@ export default function SeoulJeonjuTrip() {
                           <span className="text-xs font-bold tracking-[0.2em]" style={{ color: '#1E70A8' }}>必逛地標</span>
                         </div>
                         <div className="text-sm text-stone-700 leading-relaxed">
-                          <ChipLinks text="景福宮 · 昌德宮 · 光化門 · 勤政殿 · N首爾塔 · 南山纜車 · 明洞大聖堂 · 明洞商圈 · 清溪川 · 南大門市場 · 廣藏市場 · 首爾火車站 · 仁寺洞傳統文化街" hint="首爾" />
+                          景福宮 · 昌德宮 · 光化門 · 勤政殿 · N首爾塔 · 南山纜車 · 明洞大聖堂 · 明洞商圈 · 清溪川 · 南大門市場 · 廣藏市場 · 首爾火車站 · 仁寺洞傳統文化街
                         </div>
                       </div>
                       <div className="p-4 rounded-2xl bg-white border border-blue-100 ink-shadow">
@@ -633,7 +616,7 @@ export default function SeoulJeonjuTrip() {
                           <span className="text-xs font-bold tracking-[0.2em]" style={{ color: '#1E70A8' }}>必買特產</span>
                         </div>
                         <div className="text-sm text-stone-700 leading-relaxed">
-                          <ChipLinks text="高麗人蔘 · 韓國海苔 · 柚子茶 · 韓國泡菜 · 韓國傳統工藝品 · K-Beauty 美妝" hint="首爾 명동" />
+                          高麗人蔘 · 韓國海苔 · 柚子茶 · 韓國泡菜 · 韓國傳統工藝品 · K-Beauty 美妝
                         </div>
                       </div>
                       <div className="p-4 rounded-2xl bg-white border border-blue-100 ink-shadow">
@@ -642,7 +625,7 @@ export default function SeoulJeonjuTrip() {
                           <span className="text-xs font-bold tracking-[0.2em]" style={{ color: '#1E70A8' }}>必吃美食</span>
                         </div>
                         <div className="text-sm text-stone-700 leading-relaxed">
-                          <ChipLinks text="韓式烤肉 · 部隊鍋 · 拌飯 · 辣炒年糕 · 廣藏市場綠豆煎餅 · 魚板湯" hint="首爾 明洞" />
+                          韓式烤肉 · 部隊鍋 · 拌飯 · 辣炒年糕 · 廣藏市場綠豆煎餅 · 魚板湯
                         </div>
                       </div>
                     </div>
@@ -684,10 +667,6 @@ export default function SeoulJeonjuTrip() {
                 {/* 全州必吃必看 */}
                 {mapCity === 'jeonju' && (
                   <Section title="全州必吃必看" subtitle="Local Highlights">
-                    <div className="mb-3 px-3 py-2 rounded-lg text-xs flex items-center gap-1.5" style={{ background: '#FEF6E0', color: '#7A4D00' }}>
-                      <Navigation className="w-3.5 h-3.5 shrink-0" />
-                      <span>輕觸任一藍色項目即可開啟 Google Maps 導航</span>
-                    </div>
                     <div className="grid grid-cols-1 gap-3">
                       <div className="p-4 rounded-2xl bg-white border border-blue-100 ink-shadow">
                         <div className="flex items-center gap-2 mb-2">
@@ -695,7 +674,7 @@ export default function SeoulJeonjuTrip() {
                           <span className="text-xs font-bold tracking-[0.2em]" style={{ color: '#1E70A8' }}>必吃美食</span>
                         </div>
                         <div className="text-sm text-stone-700 leading-relaxed">
-                          <ChipLinks text="全州拌飯(色香味俱全) · 解酒湯飯(清爽暖胃) · 五花肉(香嫩多汁) · 紅豆湯(甜而不膩) · 高速公路休息站核桃燒" hint="全州 韓屋村" />
+                          全州拌飯(色香味俱全) · 解酒湯飯(清爽暖胃) · 五花肉(香嫩多汁) · 紅豆湯(甜而不膩) · 高速公路休息站核桃燒
                         </div>
                       </div>
                       <div className="p-4 rounded-2xl bg-white border border-blue-100 ink-shadow">
@@ -704,7 +683,7 @@ export default function SeoulJeonjuTrip() {
                           <span className="text-xs font-bold tracking-[0.2em]" style={{ color: '#1E70A8' }}>韓屋村必看</span>
                         </div>
                         <div className="text-sm text-stone-700 leading-relaxed">
-                          <ChipLinks text="韓紙工藝(體驗傳統工藝之美) · 韓服體驗(穿韓服留下美照) · 慶基殿(感受歷史氣息) · 殿洞聖堂(紅磚哥德式教堂)" hint="全州 韓屋村" />
+                          韓紙工藝(體驗傳統工藝之美) · 韓服體驗(穿韓服留下美照) · 慶基殿(感受歷史氣息) · 殿洞聖堂(紅磚哥德式教堂)
                         </div>
                       </div>
                     </div>
@@ -741,6 +720,8 @@ export default function SeoulJeonjuTrip() {
           <DayView
             day={days.find(d => d.id === activeDay)}
             details={dayDetails[activeDay]}
+            expandedDetail={expandedDetail}
+            setExpandedDetail={setExpandedDetail}
           />
         )}
       </main>
@@ -853,25 +834,6 @@ export default function SeoulJeonjuTrip() {
 // ─────────────────────────────────────────
 // SUB-COMPONENTS
 // ─────────────────────────────────────────
-function ChipLinks({ text, hint = '' }) {
-  return (
-    <>
-      {text.split(' · ').map((n, i, arr) => (
-        <React.Fragment key={i}>
-          <a
-            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(n + (hint ? ' ' + hint : ''))}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline transition font-medium"
-            style={{ color: '#1E70A8' }}
-          >{n}</a>
-          {i < arr.length - 1 && <span className="text-stone-400"> · </span>}
-        </React.Fragment>
-      ))}
-    </>
-  );
-}
-
 function OverviewPill({ active, onClick, icon: Icon, label, sub }) {
   return (
     <button onClick={onClick}
@@ -887,6 +849,115 @@ function OverviewPill({ active, onClick, icon: Icon, label, sub }) {
 }
 
 // 地圖熱點：點擊跳 Google Maps 導航
+// 5/12 法院拜會詳細流程
+function CourtDetail() {
+  return (
+    <div className="rounded-2xl p-4 ink-shadow" style={{ background: '#FFF8E1', border: '1px solid #FFE082' }}>
+      <div className="text-xs font-bold tracking-wider mb-3" style={{ color: '#7A4D00' }}>
+        🏛️ 全州地方法院 詳細流程（韓方提供）
+      </div>
+
+      <div className="space-y-2 text-xs leading-relaxed">
+        <DetailRow time="14:00-14:05" title="抵達法院 & 移動" desc="正門迎接(公報官、總務課長)・庶務擔當官指引・保安管理隊指揮車輛" />
+        <DetailRow time="14:05-14:25" title="參觀審判設施(20分鐘)" desc={
+          <span>
+            參觀順序:<br/>
+            ① 法曹三聖像 → ② 刑事法庭(203號) → ③ 會面交往中心 'Doran Doran' → ④ 民事法庭(501號) 遠程審判演示<br/>
+            <span className="text-stone-500">負責人員:公報官、總務課長</span>
+          </span>
+        } />
+        <DetailRow time="14:25-14:30" title="移動到 8 樓小會議室" desc="庶務行政官指引" />
+        <DetailRow time="14:30-14:40" title="與法院長談話(10分鐘)" desc={
+          <span>
+            <span className="font-bold" style={{ color: '#B45309' }}>⚠️ 家屬只能在咨詢室等待,不能進場</span><br/>
+            出席:首席部長法官、公報官、台中律師公會 8 位、日本鹿兒島縣 2 位、全羅北道 4 位、翻譯<br/>
+            <span className="text-stone-500">主持:公報官 / 指引:庶務行政官</span>
+          </span>
+        } />
+        <DetailRow time="14:40" title="正門歡送" desc="庶務行政官指引" />
+      </div>
+
+      <div className="mt-3 pt-3 border-t" style={{ borderColor: '#FFE082' }}>
+        <div className="text-xs font-bold mb-2" style={{ color: '#7A4D00' }}>📋 8 樓談話座位圖</div>
+        <picture>
+          <source srcSet="/court-seating.webp" type="image/webp" />
+          <img src="/court-seating.jpg" alt="法院 8 樓會議室座位圖"
+            className="w-full rounded-lg cursor-zoom-in" loading="lazy"
+            onClick={(e) => { e.stopPropagation(); window.open('/court-seating.jpg', '_blank'); }} />
+        </picture>
+        <div className="text-[11px] text-stone-500 mt-2 leading-relaxed">
+          台方位置:左側 6 位(林炯郡 國際交流委員會副委員長、莎絲奇雅・薄斯凱 國際委員會委員、朴日鎮 國際交流特別委員副幹事、姜信武、李參日 律師會副會長、公報官)+ 首席部長法官 / 韓方位置:右側(餘宇泉 國際交流委員會委員長、李宇章 理事、韓榮秉 事務總長、吳燮均 常務理事、金學洙 律師會會長、後莉娜・卞肅 國際委員會委員長、河松民 律師會理事長、田容鎮 翻譯)
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 5/12 檢察院拜會詳細流程
+function ProsecutorDetail() {
+  return (
+    <div className="rounded-2xl p-4 ink-shadow" style={{ background: '#FFF8E1', border: '1px solid #FFE082' }}>
+      <div className="text-xs font-bold tracking-wider mb-3" style={{ color: '#7A4D00' }}>
+        ⚖️ 全州地方檢察院 詳細流程(韓方提供)
+      </div>
+
+      <div className="space-y-2 text-xs leading-relaxed">
+        <DetailRow time="15:00-15:10" title="與檢察長談話" desc={
+          <span>
+            <span className="font-bold" style={{ color: '#15803D' }}>✅ 家屬都可一起參加!</span><br/>
+            地點:7 樓 中會議室
+          </span>
+        } />
+        <DetailRow time="15:10-15:25" title="參觀檢察院(15分鐘)" desc={
+          <span>
+            參觀順序:<br/>
+            ① 檢察官辦公室(刑事 1 部 김훈영 檢察官) → ② 錄音錄像調查室 → ③ 婦女兒童調查室 → ④ 溫故知新畫廊<br/>
+            <span className="text-stone-500">活動負責人指引・正門歡送</span>
+          </span>
+        } />
+        <DetailRow time="15:25-15:30" title="合影留念 + 贈送紀念品" desc="地點:3 樓 大會議室" />
+      </div>
+    </div>
+  );
+}
+
+// 5/12 律協交流會詳細流程
+function BarMeetingDetail() {
+  return (
+    <div className="rounded-2xl p-4 ink-shadow" style={{ background: '#FFF8E1', border: '1px solid #FFE082' }}>
+      <div className="text-xs font-bold tracking-wider mb-3" style={{ color: '#7A4D00' }}>
+        👥 律協交流會 6 道流程(韓方提供)
+      </div>
+
+      <div className="space-y-2 text-xs leading-relaxed">
+        <DetailRow time="①" title="開幕詞及致辭" desc="全羅北道律師會會長歡迎辭 → 台中律師公會理事長致辭" />
+        <DetailRow time="②" title="出席人員介紹" desc="全羅北道律師會 → 台中律師公會 雙方介紹" />
+        <DetailRow time="③" title="情況匯報" desc="全羅北道律師會 → 台中律師公會 雙方匯報" />
+        <DetailRow time="④" title="互贈禮品" desc="雙方代表互贈紀念品" />
+        <DetailRow time="⑤" title="合影留念" desc="全體合照" />
+        <DetailRow time="⑥" title="閉幕" desc="會議結束 → 接續 18:00 律協會長作陪晚餐" />
+      </div>
+
+      <div className="mt-3 pt-3 border-t text-[11px] leading-relaxed" style={{ borderColor: '#FFE082', color: '#7A4D00' }}>
+        💡 <strong>準備提醒</strong>:理事長致辭 / 公會情況匯報需事先準備中文稿(由翻譯協助同步翻韓文),禮品 13 份由台方準備
+      </div>
+    </div>
+  );
+}
+
+// DetailRow 元件
+function DetailRow({ time, title, desc }) {
+  return (
+    <div className="flex gap-2">
+      <div className="shrink-0 w-20 font-bold font-mono text-xs" style={{ color: '#7A4D00' }}>{time}</div>
+      <div className="flex-1">
+        <div className="font-bold" style={{ color: '#0F4C75' }}>{title}</div>
+        <div className="text-stone-700 mt-0.5">{desc}</div>
+      </div>
+    </div>
+  );
+}
+
 function Hotspot({ top, left, label, query }) {
   const handleClick = (e) => {
     e.stopPropagation(); // 不要觸發父層的 lightbox open
@@ -900,13 +971,13 @@ function Hotspot({ top, left, label, query }) {
       style={{ top, left }}
       aria-label={`查看 ${label}`}
     >
-      {/* 脈動光環 */}
-      <span className="absolute inset-0 rounded-full animate-ping" style={{ background: '#FFB800', opacity: 0.4 }}></span>
-      {/* 主要圓點 */}
-      <span className="relative block w-5 h-5 rounded-full border-2 border-white shadow-lg active:scale-90 transition-transform"
+      {/* 脈動光環(縮小+更柔和) */}
+      <span className="absolute inset-0 rounded-full animate-ping" style={{ background: '#FFB800', opacity: 0.3 }}></span>
+      {/* 主要圓點(從 w-5 h-5 縮小到 w-3 h-3) */}
+      <span className="relative block w-3 h-3 rounded-full border border-white shadow-md active:scale-90 transition-transform"
         style={{ background: 'linear-gradient(135deg, #FF6B35 0%, #FFB800 100%)' }}>
       </span>
-      {/* 標籤（hover 才出現,手機上點才出現,但因為點直接跳轉所以這只在大螢幕用） */}
+      {/* 標籤(桌面 hover 才出現) */}
       <span className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-0.5 rounded-md bg-black/75 text-white text-[10px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
         {label}
       </span>
@@ -1072,7 +1143,7 @@ function Note({ children }) {
   );
 }
 
-function DayView({ day, details }) {
+function DayView({ day, details, expandedDetail, setExpandedDetail }) {
   if (!day || !details) return null;
   const Icon = day.icon;
 
@@ -1106,6 +1177,8 @@ function DayView({ day, details }) {
         <div className="absolute left-[68px] top-2 bottom-2 w-1 rounded-full" style={{ background: 'linear-gradient(180deg, #88CCED 0%, #DDEEF7 100%)' }}></div>
         {details.schedule.map((item, i) => {
           const ItemIcon = item.icon || Clock;
+          const isExpandable = !!item.expandKey;
+          const isExpanded = expandedDetail === item.expandKey;
           return (
             <div key={i} className="flex gap-4 mb-3 relative">
               <div className="w-14 shrink-0 text-right pt-2">
@@ -1123,73 +1196,44 @@ function DayView({ day, details }) {
                 <ItemIcon className="w-4 h-4" />
               </div>
               <div className="flex-1 pb-2">
-                <div className={`p-3 rounded-2xl ${
-                  item.formal ? 'border-l-4' :
-                  item.highlight ? 'text-white' : 'bg-white border border-blue-100'
-                }`} style={
-                  item.formal ? { background: '#FEF6E0', borderLeftColor: '#FFB800' } :
-                  item.highlight ? { background: 'linear-gradient(135deg, #4DA3D6 0%, #6FBEE0 100%)' } : {}
-                }>
-                  <div className="flex items-start justify-between gap-2">
+                <button
+                  onClick={isExpandable ? () => setExpandedDetail(isExpanded ? null : item.expandKey) : undefined}
+                  className={`w-full text-left p-3 rounded-2xl transition-all ${
+                    item.formal ? 'border-l-4' :
+                    item.highlight ? 'text-white' : 'bg-white border border-blue-100'
+                  } ${isExpandable ? 'active:scale-[0.98]' : ''}`}
+                  style={
+                    item.formal ? { background: '#FEF6E0', borderLeftColor: '#FFB800' } :
+                    item.highlight ? { background: 'linear-gradient(135deg, #4DA3D6 0%, #6FBEE0 100%)' } : {}
+                  }
+                >
+                  <div className="flex items-start gap-2">
                     <div className="flex-1 min-w-0">
                       <div className={`font-bold text-sm leading-snug`} style={item.formal ? { color: '#7A4D00' } : !item.highlight ? { color: '#0F4C75' } : {}}>{item.title}</div>
                       <div className={`text-xs mt-1`} style={
                         item.formal ? { color: '#9A6300' } :
                         item.highlight ? { color: 'rgba(255,255,255,0.85)' } : { color: '#78716c' }
                       }>{item.sub}</div>
-                      {item.booking && (
-                        <div className="mt-2 pt-2 text-xs space-y-1 border-t" style={
-                          item.highlight ? { borderColor: 'rgba(255,255,255,0.3)', color: 'rgba(255,255,255,0.95)' } :
-                          item.formal ? { borderColor: '#F0D58A', color: '#7A4D00' } :
-                          { borderColor: '#DBEAF4', color: '#0F4C75' }
-                        }>
-                          <div className="flex items-start gap-1.5">
-                            <Star className="w-3 h-3 mt-0.5 shrink-0" />
-                            <span><strong>{item.booking.seat}</strong>・{item.booking.qty}</span>
-                          </div>
-                          <div className="flex items-start gap-1.5">
-                            <MapPin className="w-3 h-3 mt-0.5 shrink-0" />
-                            <span>{item.booking.venue}</span>
-                          </div>
-                          <div className="flex items-start gap-1.5">
-                            <Clock className="w-3 h-3 mt-0.5 shrink-0" />
-                            <span>{item.booking.enter}</span>
-                          </div>
-                          <div className="opacity-80 text-[11px] leading-relaxed">
-                            {item.booking.source && <span>{item.booking.source} 訂單 {item.booking.orderNo} | 確認碼 {item.booking.confirmNo}</span>}
-                            {item.booking.rep && <><br/>代表人：{item.booking.rep}</>}
-                            {item.booking.rules && <><br/>{item.booking.rules}</>}
-                          </div>
-                          {item.booking.tel && (
-                            <a
-                              href={`tel:${item.booking.tel.replace(/[^+\d]/g, '')}`}
-                              onClick={(e) => e.stopPropagation()}
-                              className="flex items-center gap-1.5 mt-1 underline"
-                            >
-                              <Phone className="w-3 h-3 shrink-0" />
-                              <span>{item.booking.telLabel} {item.booking.tel}</span>
-                            </a>
-                          )}
-                        </div>
-                      )}
                     </div>
-                    <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.title)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      aria-label={`導航到 ${item.title}`}
-                      className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition active:scale-95"
-                      style={
-                        item.formal ? { background: '#FFB800', color: '#fff' } :
-                        item.highlight ? { background: 'rgba(255,255,255,0.25)', color: '#fff' } :
-                        { background: '#E8F4FB', color: '#1E70A8' }
-                      }
-                    >
-                      <Navigation className="w-4 h-4" />
-                    </a>
+                    {isExpandable && (
+                      <span className="shrink-0 text-xs font-bold px-2 py-0.5 rounded-full" style={{
+                        background: item.formal ? '#FFB800' : 'rgba(255,255,255,0.3)',
+                        color: item.formal ? 'white' : 'white'
+                      }}>
+                        {isExpanded ? '收起 ▲' : '詳細 ▼'}
+                      </span>
+                    )}
                   </div>
-                </div>
+                </button>
+
+                {/* 展開詳細流程 */}
+                {isExpandable && isExpanded && (
+                  <div className="mt-2 fade-up">
+                    {item.expandKey === 'court' && <CourtDetail />}
+                    {item.expandKey === 'prosecutor' && <ProsecutorDetail />}
+                    {item.expandKey === 'bar' && <BarMeetingDetail />}
+                  </div>
+                )}
               </div>
             </div>
           );
