@@ -720,6 +720,8 @@ export default function SeoulJeonjuTrip() {
           <DayView
             day={days.find(d => d.id === activeDay)}
             details={dayDetails[activeDay]}
+            expandedDetail={expandedDetail}
+            setExpandedDetail={setExpandedDetail}
           />
         )}
       </main>
@@ -1141,7 +1143,7 @@ function Note({ children }) {
   );
 }
 
-function DayView({ day, details }) {
+function DayView({ day, details, expandedDetail, setExpandedDetail }) {
   if (!day || !details) return null;
   const Icon = day.icon;
 
