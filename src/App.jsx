@@ -882,40 +882,45 @@ export default function SeoulJeonjuTrip() {
         </Modal>
       )}
 
-      {/* ─── INSTALL TO HOME SCREEN MODAL (iOS 教學) ─── */}
+      {/* ─── INSTALL TO HOME SCREEN MODAL (iOS / Android 雙教學) ─── */}
       {installModalOpen && (
-        <Modal onClose={() => setInstallModalOpen(false)} title="加入主畫面" subtitle={isIOS ? 'iPhone Safari' : '安裝教學'}>
+        <Modal onClose={() => setInstallModalOpen(false)} title="加入主畫面" subtitle={isIOS ? 'iPhone・iPad' : 'Android'}>
           <div className="space-y-3">
-            {isIOS && (
-              <div className="p-3 rounded-xl text-xs" style={{ background: '#FEF6E0', color: '#7A4D00' }}>
-                ⚠️ 必須用 <strong>Safari</strong> 打開本網頁。Chrome / FB / LINE / IG 內建瀏覽器無此功能,請先點右上角「⋯」→ <strong>用 Safari 開啟</strong>。
-              </div>
+            <div className="p-3 rounded-xl text-xs leading-relaxed" style={{ background: '#FEF6E0', color: '#7A4D00' }}>
+              ⚠️ 必須用 <strong>{isIOS ? 'Safari' : 'Chrome / Samsung Internet / Edge'}</strong> 打開本網頁。
+              <br />LINE / FB / IG 等內建瀏覽器{isIOS ? '無此功能' : '只能做網頁捷徑(無法全螢幕)'},請先在內建瀏覽器點右上角「⋯」/「⋮」→ <strong>{isIOS ? '用 Safari 開啟' : '在 Chrome 開啟'}</strong>。
+            </div>
+
+            {isIOS ? (
+              /* ─── iOS Safari ─── */
+              <ol className="space-y-2">
+                <InstallStep n={1}>
+                  點 Safari <strong>底部網址列右側</strong>的 <span className="inline-block bg-blue-50 px-2 py-0.5 rounded text-xs font-mono">⬆️</span> <strong>分享按鈕</strong>
+                  <div className="text-xs mt-1" style={{ color: '#78716c' }}>(向上箭頭方框圖示。若你把網址列改到頂部,則在頂部右側)</div>
+                </InstallStep>
+                <InstallStep n={2}>
+                  分享選單往下滑,點 <span className="inline-block bg-blue-50 px-2 py-0.5 rounded text-xs">加入主畫面 <strong>➕</strong></span>
+                </InstallStep>
+                <InstallStep n={3}>
+                  右上角點 <strong>「新增」</strong>,主畫面就會出現「韓國交流」icon (藍底白「韓」字)
+                </InstallStep>
+              </ol>
+            ) : (
+              /* ─── Android Chrome ─── */
+              <ol className="space-y-2">
+                <InstallStep n={1}>
+                  點 Chrome <strong>右上角</strong>的 <span className="inline-block bg-blue-50 px-2 py-0.5 rounded text-xs font-mono">⋮</span> <strong>(三點選單)</strong>
+                </InstallStep>
+                <InstallStep n={2}>
+                  選 <span className="inline-block bg-blue-50 px-2 py-0.5 rounded text-xs">📲 <strong>安裝應用程式</strong></span> 或 <span className="inline-block bg-blue-50 px-2 py-0.5 rounded text-xs">加到主畫面</span>
+                  <div className="text-xs mt-1" style={{ color: '#78716c' }}>(Samsung Internet 是 ☰ → 加到 → 主畫面)</div>
+                </InstallStep>
+                <InstallStep n={3}>
+                  彈出對話框點 <strong>「安裝」</strong> / 「新增」,主畫面就會出現「韓國交流」icon (藍底白「韓」字)
+                </InstallStep>
+              </ol>
             )}
-            <ol className="space-y-2">
-              <li className="flex items-start gap-3 p-3 bg-white border border-blue-100 rounded-2xl">
-                <div className="shrink-0 w-7 h-7 rounded-full font-extrabold text-white flex items-center justify-center text-sm"
-                     style={{ background: 'linear-gradient(135deg, #4DA3D6 0%, #6FBEE0 100%)' }}>1</div>
-                <div className="flex-1 text-sm leading-relaxed" style={{ color: '#0F4C75' }}>
-                  {isIOS ? <>點 Safari <strong>下方中央</strong>的 <span className="inline-block bg-blue-50 px-2 py-0.5 rounded text-xs font-mono">⬆️ 分享</span> 按鈕</>
-                         : <>點瀏覽器右上角 <span className="inline-block bg-blue-50 px-2 py-0.5 rounded text-xs font-mono">⋮ 選單</span></>}
-                </div>
-              </li>
-              <li className="flex items-start gap-3 p-3 bg-white border border-blue-100 rounded-2xl">
-                <div className="shrink-0 w-7 h-7 rounded-full font-extrabold text-white flex items-center justify-center text-sm"
-                     style={{ background: 'linear-gradient(135deg, #4DA3D6 0%, #6FBEE0 100%)' }}>2</div>
-                <div className="flex-1 text-sm leading-relaxed" style={{ color: '#0F4C75' }}>
-                  {isIOS ? <>選單往下滑,選 <span className="inline-block bg-blue-50 px-2 py-0.5 rounded text-xs">加入主畫面 <strong>➕</strong></span></>
-                         : <>選 <span className="inline-block bg-blue-50 px-2 py-0.5 rounded text-xs">安裝應用程式 / 加到主畫面</span></>}
-                </div>
-              </li>
-              <li className="flex items-start gap-3 p-3 bg-white border border-blue-100 rounded-2xl">
-                <div className="shrink-0 w-7 h-7 rounded-full font-extrabold text-white flex items-center justify-center text-sm"
-                     style={{ background: 'linear-gradient(135deg, #4DA3D6 0%, #6FBEE0 100%)' }}>3</div>
-                <div className="flex-1 text-sm leading-relaxed" style={{ color: '#0F4C75' }}>
-                  右上角點 <strong>新增 / 安裝</strong>,主畫面就會出現「韓國交流」icon (藍底「韓」字)
-                </div>
-              </li>
-            </ol>
+
             <div className="p-3 rounded-xl text-xs" style={{ background: 'linear-gradient(135deg, #4DA3D6 0%, #6FBEE0 100%)', color: 'white' }}>
               ✓ 裝完後從主畫面點 icon 開啟,跟 native app 一樣全螢幕、無瀏覽器網址列
             </div>
@@ -958,6 +963,16 @@ export default function SeoulJeonjuTrip() {
 // ─────────────────────────────────────────
 // SUB-COMPONENTS
 // ─────────────────────────────────────────
+function InstallStep({ n, children }) {
+  return (
+    <li className="flex items-start gap-3 p-3 bg-white border border-blue-100 rounded-2xl">
+      <div className="shrink-0 w-7 h-7 rounded-full font-extrabold text-white flex items-center justify-center text-sm"
+           style={{ background: 'linear-gradient(135deg, #4DA3D6 0%, #6FBEE0 100%)' }}>{n}</div>
+      <div className="flex-1 text-sm leading-relaxed" style={{ color: '#0F4C75' }}>{children}</div>
+    </li>
+  );
+}
+
 function OverviewPill({ active, onClick, icon: Icon, label, sub }) {
   return (
     <button onClick={onClick}
