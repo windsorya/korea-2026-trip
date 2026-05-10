@@ -199,7 +199,7 @@ export default function SeoulJeonjuTrip() {
         { time: '14:00', title: '全州地方法院 拜會法院長', sub: '14:00 抵達 → 14:05 參觀審判設施 → 14:30 與法院長談話 → 14:40 歡送 ⚠️ 家屬在咨詢室等待', icon: Scale, highlight: true, formal: true, expandKey: 'court' },
         { time: '15:00', title: '全州地方檢察院 拜會檢察長', sub: '15:00 與檢察長談話(7樓中會議室,家屬一起) → 15:10 參觀檢察院 → 15:25 合影贈禮(3樓大會議室)', icon: Briefcase, highlight: true, formal: true, expandKey: 'prosecutor' },
         { time: '16:00', title: '全羅北道律師協會會館 交流會', sub: '開幕詞 → 出席介紹 → 情況匯報 → 互贈禮品 → 合影 → 閉幕', icon: Users, highlight: true, formal: true, expandKey: 'bar' },
-        { time: '18:00', title: '晚餐', sub: '全羅北道律師協會會長作陪', icon: Utensils, highlight: true },
+        { time: '18:00', title: '晚餐：천년누리봄', sub: '全州막걸리・全羅北道律師協會會長作陪・座位表見展開', icon: Utensils, highlight: true, formal: true, expandKey: 'dinner', mapsQuery: '천년누리봄 전주' },
       ],
     },
     '0513': {
@@ -1077,8 +1077,54 @@ function BarMeetingDetail() {
         <DetailRow time="⑥" title="閉幕" desc="會議結束 → 接續 18:00 律協會長作陪晚餐" />
       </div>
 
+      <div className="mt-3 pt-3 border-t" style={{ borderColor: '#FFE082' }}>
+        <div className="text-xs font-bold mb-2" style={{ color: '#7A4D00' }}>📋 大會議室座位圖（대회의실 배치도）</div>
+        <img src="/bar-meeting-seating.jpg" alt="律協大會議室座位圖"
+          className="w-full rounded-lg cursor-zoom-in" loading="lazy"
+          onClick={(e) => { e.stopPropagation(); window.open('/bar-meeting-seating.jpg', '_blank'); }} />
+        <div className="text-[11px] text-stone-500 mt-2 leading-relaxed">
+          場地：본회 회관 대회의실（全羅北道律師會館 5F・전주시 덕진구 만성중앙로 60）<br/>
+          台方位置：左側、右側兩排（理事長 何崇民、副理事長 王志文等台中律師公會代表）<br/>
+          韓方位置：中間兩排（會長 金學壽、委員長 陳泰昊、歷代會長 沈昞聯/黃善哲等全北律協代表）<br/>
+          日方位置：下方（福永 憲章、笹川 竜伴）
+        </div>
+      </div>
+
       <div className="mt-3 pt-3 border-t text-[11px] leading-relaxed" style={{ borderColor: '#FFE082', color: '#7A4D00' }}>
         💡 <strong>準備提醒</strong>:理事長致辭 / 公會情況匯報需事先準備中文稿(由翻譯協助同步翻韓文),禮品 13 份由台方準備
+      </div>
+    </div>
+  );
+}
+
+// 5/12 晚餐 천년누리봄 詳細
+function DinnerDetail() {
+  return (
+    <div className="rounded-2xl p-4 ink-shadow" style={{ background: '#FFF8E1', border: '1px solid #FFE082' }}>
+      <div className="text-xs font-bold tracking-wider mb-3" style={{ color: '#7A4D00' }}>
+        🍽️ 18:00 晚餐 · 천년누리봄（韓方安排）
+      </div>
+
+      <div className="space-y-2 text-xs leading-relaxed">
+        <DetailRow time="場地" title="천년누리봄（天年累裏春）" desc="全州傳統막걸리(米酒)餐廳・由全羅北道律師協會會長作陪" />
+      </div>
+
+      <a href="https://map.naver.com/p/search/%EC%B2%9C%EB%85%84%EB%88%84%EB%A6%AC%EB%B4%84%20%EC%A0%84%EC%A3%BC"
+         target="_blank" rel="noreferrer"
+         className="mt-3 inline-flex items-center gap-2 px-3 py-2 text-xs font-bold rounded-xl text-white active:scale-95 transition-transform"
+         style={{ background: 'linear-gradient(135deg, #4DA3D6 0%, #6FBEE0 100%)' }}>
+        <MapPin className="w-3.5 h-3.5" />
+        Naver Map 導航至 천년누리봄
+      </a>
+
+      <div className="mt-3 pt-3 border-t" style={{ borderColor: '#FFE082' }}>
+        <div className="text-xs font-bold mb-2" style={{ color: '#7A4D00' }}>📋 晚餐座位圖（만찬장 배치도）</div>
+        <img src="/dinner-seating.jpg" alt="천년누리봄 晚餐座位圖"
+          className="w-full rounded-lg cursor-zoom-in" loading="lazy"
+          onClick={(e) => { e.stopPropagation(); window.open('/dinner-seating.jpg', '_blank'); }} />
+        <div className="text-[11px] text-stone-500 mt-2 leading-relaxed">
+          四桌配置(每桌 4-6 人混編,雙方代表錯開坐)・含 4 位通譯：田鏞珍、姜信武、姜多衍、金容彬
+        </div>
       </div>
     </div>
   );
@@ -1388,6 +1434,7 @@ function DayView({ day, details, expandedDetail, setExpandedDetail }) {
                     {item.expandKey === 'court' && <CourtDetail />}
                     {item.expandKey === 'prosecutor' && <ProsecutorDetail />}
                     {item.expandKey === 'bar' && <BarMeetingDetail />}
+                    {item.expandKey === 'dinner' && <DinnerDetail />}
                   </div>
                 )}
               </div>
