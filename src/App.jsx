@@ -1100,9 +1100,14 @@ function BarMeetingDetail() {
           onClick={(e) => { e.stopPropagation(); window.open('/bar-meeting-seating.jpg', '_blank'); }} />
         <div className="text-[11px] text-stone-500 mt-2 leading-relaxed">
           場地：본회 회관 대회의실（全羅北道律師會館 5F・전주시 덕진구 만성중앙로 60）<br/>
-          台方位置：左側、右側兩排（理事長 何崇民、副理事長 王志文等台中律師公會代表）<br/>
-          韓方位置：中間兩排（會長 金學壽、委員長 陳泰昊、歷代會長 沈昞聯/黃善哲等全北律協代表）<br/>
-          日方位置：下方（福永 憲章、笹川 竜伴）
+          配置：U 字形面對螢幕（스크린），右上角主持人席（사회자）<br/>
+          <strong>台方</strong>(左側兩列共 13 位)：<br/>
+          ・最左外圍：黃綉鈴、葉淑娌、張文郁、林以凡<br/>
+          ・中央左欄：理事長 何崇民、全理事長 吳紹貴、副理事長 王志文、理事 韓銘峰、理事 李易璋、理事 呂緯武、常務監事 蘇志淵、監事 朱嘉妍、副委員長 林香均<br/>
+          <strong>韓方</strong>(右側兩列共 16 位,含通譯)：<br/>
+          ・中央右欄：會長 金學壽、委員長 陳泰昊、歷代會長 沈昞聯、歷代會長 黃善哲、副委員長 李鍾奇、副會長 李三一、副會長 李旼鎬、總務理事 金容彬、委員 朴炯允<br/>
+          ・最右外圍：委員 朴鎰址、委員 姜信武、<strong>通譯 田鏞珍</strong>、委員 崔容浚、委員 金圓悟、委員 宋暻漢、委員 黃勝琮<br/>
+          <strong>日方</strong>(下方中央 2 位)：福永 憲章、笹川 竜伴
         </div>
       </div>
 
@@ -1139,7 +1144,9 @@ function DinnerDetail() {
           className="w-full rounded-lg cursor-zoom-in" loading="lazy"
           onClick={(e) => { e.stopPropagation(); window.open('/dinner-seating.jpg', '_blank'); }} />
         <div className="text-[11px] text-stone-500 mt-2 leading-relaxed">
-          四桌配置(每桌 4-6 人混編,雙方代表錯開坐)・含 4 位通譯：田鏞珍、姜信武、姜多衍、金容彬
+          配置：<strong>8 桌</strong>(4 行 × 2 列,每桌 4 人圍坐),雙方代表混編錯開坐<br/>
+          含 <strong>5 位通譯</strong>：田鏞珍、姜信武、朴鎰址、姜多衍、金容彬<br/>
+          台方代表(13 位)+ 韓方代表(16 位)+ 日方 2 位(福永憲章、笹川竜伴) = 共 31 人
         </div>
       </div>
     </div>
