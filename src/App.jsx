@@ -14,6 +14,7 @@ export default function SeoulJeonjuTrip() {
   const [mapOpen, setMapOpen] = useState(false); // lightbox 開關
   const [mapCity, setMapCity] = useState('seoul'); // seoul | jeonju
   const [expandedDetail, setExpandedDetail] = useState(null); // 5/12 拜會詳細流程展開: court | prosecutor | bar | null
+  const [imgLightbox, setImgLightbox] = useState(null); // { src, alt } | null — 通用圖片 lightbox(座位表等)
 
   // PWA 安裝相關 state
   const [installPrompt, setInstallPrompt] = useState(null);   // Android Chrome 的 beforeinstallprompt event
@@ -810,6 +811,7 @@ export default function SeoulJeonjuTrip() {
             details={dayDetails[activeDay]}
             expandedDetail={expandedDetail}
             setExpandedDetail={setExpandedDetail}
+            onImgClick={(src, alt) => setImgLightbox({ src, alt })}
           />
         )}
       </main>
@@ -961,6 +963,32 @@ export default function SeoulJeonjuTrip() {
           </picture>
         </div>
       )}
+
+      {/* ─── 通用圖片 LIGHTBOX(座位表等) ─── */}
+      {imgLightbox && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-2"
+          onClick={() => setImgLightbox(null)}
+        >
+          <button
+            onClick={(e) => { e.stopPropagation(); setImgLightbox(null); }}
+            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/15 backdrop-blur flex items-center justify-center text-white hover:bg-white/30 transition"
+            aria-label="關閉"
+          >
+            <X className="w-6 h-6" />
+          </button>
+          <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur text-white text-xs">
+            雙指縮放看細節 · 點空白或右上 X 關閉
+          </div>
+          <img
+            src={imgLightbox.src}
+            alt={imgLightbox.alt}
+            className="max-w-full max-h-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+            style={{ touchAction: 'pinch-zoom' }}
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -994,7 +1022,7 @@ function OverviewPill({ active, onClick, icon: Icon, label, sub }) {
 
 // 地圖熱點：點擊跳 Naver Map 導航
 // 5/12 法院拜會詳細流程
-function CourtDetail() {
+function CourtDetail({ onImgClick }) {
   return (
     <div className="rounded-2xl p-4 ink-shadow" style={{ background: '#FFF8E1', border: '1px solid #FFE082' }}>
       <div className="text-xs font-bold tracking-wider mb-3" style={{ color: '#7A4D00' }}>
@@ -1027,7 +1055,7 @@ function CourtDetail() {
           <source srcSet="/court-seating.webp" type="image/webp" />
           <img src="/court-seating.jpg" alt="法院 8 樓會議室座位圖"
             className="w-full rounded-lg cursor-zoom-in" loading="lazy"
-            onClick={(e) => { e.stopPropagation(); window.open('/court-seating.jpg', '_blank'); }} />
+            onClick={(e) => { e.stopPropagation(); onImgClick && onImgClick('/court-seating.jpg', '法院 8 樓會議室座位圖'); }} />
         </picture>
         <div className="text-[11px] text-stone-500 mt-2 leading-relaxed">
           台方位置:左側 6 位(林炯郡 國際交流委員會副委員長、莎絲奇雅・薄斯凱 國際委員會委員、朴日鎮 國際交流特別委員副幹事、姜信武、李參日 律師會副會長、公報官)+ 首席部長法官 / 韓方位置:右側(餘宇泉 國際交流委員會委員長、李宇章 理事、韓榮秉 事務總長、吳燮均 常務理事、金學洙 律師會會長、後莉娜・卞肅 國際委員會委員長、河松民 律師會理事長、田容鎮 翻譯)
@@ -1077,7 +1105,7 @@ function ProsecutorDetail() {
 }
 
 // 5/12 律協交流會詳細流程
-function BarMeetingDetail() {
+function BarMeetingDetail({ onImgClick }) {
   return (
     <div className="rounded-2xl p-4 ink-shadow" style={{ background: '#FFF8E1', border: '1px solid #FFE082' }}>
       <div className="text-xs font-bold tracking-wider mb-3" style={{ color: '#7A4D00' }}>
@@ -1097,7 +1125,7 @@ function BarMeetingDetail() {
         <div className="text-xs font-bold mb-2" style={{ color: '#7A4D00' }}>📋 大會議室座位圖（대회의실 배치도）</div>
         <img src="/bar-meeting-seating.jpg" alt="律協大會議室座位圖"
           className="w-full rounded-lg cursor-zoom-in" loading="lazy"
-          onClick={(e) => { e.stopPropagation(); window.open('/bar-meeting-seating.jpg', '_blank'); }} />
+          onClick={(e) => { e.stopPropagation(); onImgClick && onImgClick('/bar-meeting-seating.jpg', '律協大會議室座位圖'); }} />
         <div className="text-[11px] text-stone-500 mt-2 leading-relaxed">
           場地：본회 회관 대회의실（全羅北道律師會館 5F・전주시 덕진구 만성중앙로 60）<br/>
           配置：U 字形面對螢幕（스크린），右上角主持人席（사회자）<br/>
@@ -1119,7 +1147,7 @@ function BarMeetingDetail() {
 }
 
 // 5/12 晚餐 천년누리봄 詳細
-function DinnerDetail() {
+function DinnerDetail({ onImgClick }) {
   return (
     <div className="rounded-2xl p-4 ink-shadow" style={{ background: '#FFF8E1', border: '1px solid #FFE082' }}>
       <div className="text-xs font-bold tracking-wider mb-3" style={{ color: '#7A4D00' }}>
@@ -1142,7 +1170,7 @@ function DinnerDetail() {
         <div className="text-xs font-bold mb-2" style={{ color: '#7A4D00' }}>📋 晚餐座位圖（만찬장 배치도）</div>
         <img src="/dinner-seating.jpg" alt="천년누리봄 晚餐座位圖"
           className="w-full rounded-lg cursor-zoom-in" loading="lazy"
-          onClick={(e) => { e.stopPropagation(); window.open('/dinner-seating.jpg', '_blank'); }} />
+          onClick={(e) => { e.stopPropagation(); onImgClick && onImgClick('/dinner-seating.jpg', '천년누리봄 晚餐座位圖'); }} />
         <div className="text-[11px] text-stone-500 mt-2 leading-relaxed">
           配置：<strong>8 桌</strong>(4 行 × 2 列,每桌 4 人圍坐),雙方代表混編錯開坐<br/>
           含 <strong>5 位通譯</strong>：田鏞珍、姜信武、朴鎰址、姜多衍、金容彬<br/>
@@ -1351,7 +1379,7 @@ function Note({ children }) {
   );
 }
 
-function DayView({ day, details, expandedDetail, setExpandedDetail }) {
+function DayView({ day, details, expandedDetail, setExpandedDetail, onImgClick }) {
   if (!day || !details) return null;
   const Icon = day.icon;
   const mapsLink = (q) => `https://map.naver.com/p/search/${encodeURIComponent(q)}`;
@@ -1454,10 +1482,10 @@ function DayView({ day, details, expandedDetail, setExpandedDetail }) {
                 {/* 展開詳細流程 */}
                 {isExpandable && isExpanded && (
                   <div className="mt-2 fade-up">
-                    {item.expandKey === 'court' && <CourtDetail />}
+                    {item.expandKey === 'court' && <CourtDetail onImgClick={onImgClick} />}
                     {item.expandKey === 'prosecutor' && <ProsecutorDetail />}
-                    {item.expandKey === 'bar' && <BarMeetingDetail />}
-                    {item.expandKey === 'dinner' && <DinnerDetail />}
+                    {item.expandKey === 'bar' && <BarMeetingDetail onImgClick={onImgClick} />}
+                    {item.expandKey === 'dinner' && <DinnerDetail onImgClick={onImgClick} />}
                   </div>
                 )}
               </div>
