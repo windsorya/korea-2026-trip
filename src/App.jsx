@@ -165,7 +165,7 @@ export default function SeoulJeonjuTrip() {
       title: '首爾自由行 ・ 四種路線可選',
       note: '主推明洞線（米其林餃子＋NANTA＋Chimaek 慶典）。其他三條替代路線見下方。',
       schedule: [
-        { time: '09:30', title: '北村韓屋村 晨間散策', sub: '傳統韓屋聚落・拍照點', icon: Camera, mapsQuery: '북촌한옥마을' },
+        { time: '09:55', title: '廣藏市場 美食馬拉松', sub: '9:55 飯店樓下集合・富村生牛肉/順熙家綠豆煎餅/麻藥紫菜飯捲', icon: Utensils, highlight: true, mapsQuery: '광장시장' },
         { time: '12:00', title: '明洞餃子 米其林午餐', sub: '必比登推薦', icon: Utensils, mapsQuery: '명동교자 본점' },
         { time: '14:00', title: '明洞自由採買 + 大聖堂', sub: 'Olive Young・繁華商圈', icon: ShoppingBag, mapsQuery: '명동성당' },
         { time: '17:00', title: 'NANTA 亂打秀', sub: '明洞 ANT 秀劇場・震撼全場', icon: Sparkles, highlight: true, mapsQuery: '난타전용극장 명동' },
