@@ -967,26 +967,31 @@ export default function SeoulJeonjuTrip() {
       {/* ─── 通用圖片 LIGHTBOX(座位表等) ─── */}
       {imgLightbox && (
         <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-2"
+          className="fixed inset-0 z-50 bg-black/90 overflow-auto"
           onClick={() => setImgLightbox(null)}
+          style={{ touchAction: 'pinch-zoom' }}
         >
+          {/* 關閉按鈕(sticky 跟著捲動) */}
           <button
             onClick={(e) => { e.stopPropagation(); setImgLightbox(null); }}
-            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/15 backdrop-blur flex items-center justify-center text-white hover:bg-white/30 transition"
+            className="fixed top-4 right-4 z-10 w-12 h-12 rounded-full bg-white/25 backdrop-blur flex items-center justify-center text-white shadow-lg active:bg-white/40 transition"
             aria-label="關閉"
           >
-            <X className="w-6 h-6" />
+            <X className="w-7 h-7" />
           </button>
-          <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur text-white text-xs">
-            雙指縮放看細節 · 點空白或右上 X 關閉
+          <div className="fixed top-4 left-4 z-10 px-3 py-1.5 rounded-full bg-white/25 backdrop-blur text-white text-xs shadow">
+            雙指縮放 · 拖曳查看 · 點右上 X 關閉
           </div>
-          <img
-            src={imgLightbox.src}
-            alt={imgLightbox.alt}
-            className="max-w-full max-h-full object-contain"
-            onClick={(e) => e.stopPropagation()}
-            style={{ touchAction: 'pinch-zoom' }}
-          />
+          {/* 圖片容器:預設適應螢幕寬,可雙指縮放放大 */}
+          <div className="min-h-full flex items-center justify-center p-4">
+            <img
+              src={imgLightbox.src}
+              alt={imgLightbox.alt}
+              className="w-full h-auto max-w-none rounded"
+              onClick={(e) => e.stopPropagation()}
+              style={{ touchAction: 'pinch-zoom' }}
+            />
+          </div>
         </div>
       )}
     </div>
