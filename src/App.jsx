@@ -1057,9 +1057,6 @@ function CourtDetail({ onImgClick }) {
             className="w-full rounded-lg cursor-zoom-in" loading="lazy"
             onClick={(e) => { e.stopPropagation(); onImgClick && onImgClick('/court-seating.jpg', '法院 8 樓會議室座位圖'); }} />
         </picture>
-        <div className="text-[11px] text-stone-500 mt-2 leading-relaxed">
-          台方位置:左側 6 位(林炯郡 國際交流委員會副委員長、莎絲奇雅・薄斯凱 國際委員會委員、朴日鎮 國際交流特別委員副幹事、姜信武、李參日 律師會副會長、公報官)+ 首席部長法官 / 韓方位置:右側(餘宇泉 國際交流委員會委員長、李宇章 理事、韓榮秉 事務總長、吳燮均 常務理事、金學洙 律師會會長、後莉娜・卞肅 國際委員會委員長、河松民 律師會理事長、田容鎮 翻譯)
-        </div>
       </div>
 
       <div className="mt-3 p-3 rounded-xl text-xs leading-relaxed text-white" style={{ background: 'linear-gradient(135deg, #FFB800 0%, #FFD24A 100%)' }}>
