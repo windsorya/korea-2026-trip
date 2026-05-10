@@ -163,7 +163,7 @@ export default function SeoulJeonjuTrip() {
     },
     '0510': {
       title: '首爾自由行 ・ 四種路線可選',
-      note: '主推明洞線（米其林餃子＋NANTA＋Chimaek 慶典）。其他三條替代路線見下方。',
+      note: '主推：上午廣藏市場美食馬拉松＋下午明洞線（米其林餃子＋NANTA＋Chimaek 慶典）。其他三條替代路線見下方。',
       schedule: [
         { time: '09:55', title: '廣藏市場 美食馬拉松', sub: '9:55 飯店樓下集合・富村生牛肉/順熙家綠豆煎餅/麻藥紫菜飯捲', icon: Utensils, highlight: true, mapsQuery: '광장시장' },
         { time: '12:00', title: '明洞餃子 米其林午餐', sub: '必比登推薦', icon: Utensils, mapsQuery: '명동교자 본점' },
@@ -172,7 +172,7 @@ export default function SeoulJeonjuTrip() {
         { time: '19:00', title: 'BBQ Chicken 明洞之星店', sub: '12 人 Chimaek 終極慶典', icon: Utensils, mapsQuery: 'BBQ치킨 명동스타점' },
       ],
       alternatives: [
-        { name: '替代 A・廣藏市場線', detail: '美食馬拉松 → 棉被／醃海鮮 → 清溪川 → 東大門 DDP' },
+        { name: '替代 A・北村韓屋村線', detail: '北村韓屋村 晨間散策 → 三清洞咖啡街 → 嘉會洞韓屋體驗 → 仁寺洞傳統工藝' },
         { name: '替代 B・南大門線', detail: '兒童服飾 → 野菜煎餅 → 刀削麵巷 → 土俗村參雞湯' },
         { name: '替代 C・仁寺洞線', detail: '人人廣場 Ssamziegil → 土俗村參雞湯 → 明洞大聖堂' },
       ],
