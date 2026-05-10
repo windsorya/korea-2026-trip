@@ -183,29 +183,34 @@ export default function SeoulJeonjuTrip() {
         { time: '07:00', title: '飯店附近早餐', sub: '出發前用餐', icon: Coffee, mapsQuery: '세종호텔 명동' },
         { time: '09:00', title: 'Sejong Hotel 集合・接駁出發', sub: '金先生 → 公路旅行', icon: Car },
         { time: '11:30', title: '抵達全羅北道', sub: '中途休息站必買核桃燒', icon: MapPin, mapsQuery: '전주' },
-        { time: '13:00', title: 'Lahan Hotel 韓方迎接', sub: '姜信武律師、朴鎰址律師', icon: Hotel, highlight: true, mapsQuery: '라한호텔 전주' },
-        { time: '13:30', title: '午餐', sub: '韓方安排', icon: Utensils },
-        { time: '15:00', title: '全州韓屋村自由活動', sub: '韓服拍照・韓紙工藝・冰沙', icon: Camera, mapsQuery: '전주한옥마을' },
-        { time: '18:00', title: '五花肉晚餐', sub: '全羅北道律師協會 國際交流委員會委員長作陪', icon: Utensils, highlight: true },
+        { time: '12:00', title: 'Lahan Hotel 韓方迎接', sub: '姜信武律師、朴鎰址律師', icon: Hotel, highlight: true, mapsQuery: '라한호텔 전주' },
+        { time: '12:30', title: '午餐：종로회관', sub: '預訂 13 位・全州拌飯+牛肉餅・₩21,000/人', icon: Utensils, mapsQuery: '종로회관 전주' },
+        { time: '13:30', title: '全州韓屋村 自由活動', sub: '韓服拍照・韓紙工藝・冰沙（13:30-17:50）', icon: Camera, mapsQuery: '전주한옥마을' },
+        { time: '18:00', title: '晚餐：부부상회（五花肉店）', sub: '全羅北道律師協會 國際交流委員會委員長作陪', icon: Utensils, highlight: true, mapsQuery: '부부상회 전주' },
+        { time: '20:00', title: '晚餐後聚會：전일갑오', sub: '酒菜店・延續晚餐話題（20:00-22:00）', icon: Utensils, mapsQuery: '전일갑오 전주' },
       ],
     },
     '0512': {
       title: '官方交流日 ・ 兩會國際交流',
       note: '本日為訪問重點。法院、檢察院為正式外交場合,請著正裝。詳細流程由韓方提供,點下方藍色卡片展開細節。',
       schedule: [
-        { time: '07:00', title: '早餐', sub: '飯店或全州解酒豆芽湯飯店', icon: Coffee, mapsQuery: '라한호텔 전주' },
-        { time: '11:00', title: '慶基殿 文化參觀', sub: '1410 年朝鮮太宗 11 年建・供奉太祖李成桂御真・中文導覽預訂中', icon: Building2, mapsQuery: '경기전' },
-        { time: '12:00', title: '午餐', sub: '姜信武、朴鎰址作陪', icon: Utensils },
+        { time: '07:00', title: '早餐', sub: '飯店或全州解酒豆芽湯飯店・自由活動到 10:30', icon: Coffee, mapsQuery: '라한호텔 전주' },
+        { time: '10:50', title: '慶基殿 文化參觀', sub: '預訂 13 位 ₩3,000/人・中文導覽：임정숙 林先生 010-6778-6080', icon: Building2, mapsQuery: '경기전' },
+        { time: '12:00', title: '午餐：베테랑칼국수', sub: '刀削麵店・姜信武、朴鎰址作陪', icon: Utensils, mapsQuery: '베테랑칼국수 전주' },
+        { time: '13:10', title: '巴士移動：飯店 → 法院', sub: 'Lahan Hotel → 全州地方法院・約 20-30 分鐘・巴士車牌號碼 8150', icon: Car },
         { time: '14:00', title: '全州地方法院 拜會法院長', sub: '14:00 抵達 → 14:05 參觀審判設施 → 14:30 與法院長談話 → 14:40 歡送 ⚠️ 家屬在咨詢室等待', icon: Scale, highlight: true, formal: true, expandKey: 'court' },
         { time: '15:00', title: '全州地方檢察院 拜會檢察長', sub: '15:00 與檢察長談話(7樓中會議室,家屬一起) → 15:10 參觀檢察院 → 15:25 合影贈禮(3樓大會議室)', icon: Briefcase, highlight: true, formal: true, expandKey: 'prosecutor' },
         { time: '16:00', title: '全羅北道律師協會會館 交流會', sub: '開幕詞 → 出席介紹 → 情況匯報 → 互贈禮品 → 合影 → 閉幕', icon: Users, highlight: true, formal: true, expandKey: 'bar' },
+        { time: '16:50', title: '巴士移動：律協 → 飯店', sub: '律協會館 → Lahan Hotel・約 20-30 分鐘', icon: Car },
+        { time: '17:20', title: 'Lahan Hotel 整理', sub: '回飯店休息整理（17:20-17:50）', icon: Hotel, mapsQuery: '라한호텔 전주' },
         { time: '18:00', title: '晚餐：천년누리봄', sub: '全州막걸리・全羅北道律師協會會長作陪・座位表見展開', icon: Utensils, highlight: true, formal: true, expandKey: 'dinner', mapsQuery: '천년누리봄 전주' },
+        { time: '21:00', title: '晚餐後聚會（酒菜店）', sub: '全羅北道律師協會會長作陪（21:00-22:30）', icon: Utensils },
       ],
     },
     '0513': {
       title: '送別 ・ 歸國',
       schedule: [
-        { time: '06:30', title: 'Lahan Hotel 送別', sub: '姜信武律師、朴鎰址律師', icon: Hotel, mapsQuery: '라한호텔 전주' },
+        { time: '07:30', title: 'Lahan Hotel 送別', sub: '姜信武律師、朴鎰址律師', icon: Hotel, mapsQuery: '라한호텔 전주' },
         { time: '08:00', title: '接駁出發', sub: 'Lahan Hotel → 仁川機場', icon: Car },
         { time: '14:50', title: 'LJ737 起飛', sub: '仁川 T2 → 台中清泉崗 T1', icon: Plane },
         { time: '16:30', title: '抵達台灣', sub: '結束 5 天 4 夜行程', icon: Home },
@@ -1027,6 +1032,17 @@ function CourtDetail() {
         <div className="text-[11px] text-stone-500 mt-2 leading-relaxed">
           台方位置:左側 6 位(林炯郡 國際交流委員會副委員長、莎絲奇雅・薄斯凱 國際委員會委員、朴日鎮 國際交流特別委員副幹事、姜信武、李參日 律師會副會長、公報官)+ 首席部長法官 / 韓方位置:右側(餘宇泉 國際交流委員會委員長、李宇章 理事、韓榮秉 事務總長、吳燮均 常務理事、金學洙 律師會會長、後莉娜・卞肅 國際委員會委員長、河松民 律師會理事長、田容鎮 翻譯)
         </div>
+      </div>
+
+      <div className="mt-3 p-3 rounded-xl text-xs leading-relaxed text-white" style={{ background: 'linear-gradient(135deg, #FFB800 0%, #FFD24A 100%)' }}>
+        <div className="font-extrabold mb-1.5">📌 韓方重要說明</div>
+        <ul className="space-y-1 ml-4 list-disc">
+          <li>✅ <strong>可以照相</strong>(法院方無禁拍規定)</li>
+          <li>✅ 法院和檢察院走路可到(法院正門下車 → 參觀法院 → 走過去檢察院)</li>
+          <li>✅ 巴士在檢察院停車場停車,<strong>需提供車牌號碼 8150</strong></li>
+          <li>✅ 雙方都會準備紀念品</li>
+          <li>✅ 無特別注意事項,按負責人員指示行動即可</li>
+        </ul>
       </div>
     </div>
   );
